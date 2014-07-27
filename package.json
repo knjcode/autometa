@@ -1,0 +1,32 @@
+{
+  "name": "autometa",
+  "version": "0.0.0",
+  "description": "autometa ========",
+  "main": "autometa.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/knjcode/autometa.git"
+  },
+  "keywords": [
+    "excel",
+    "data",
+    "generate"
+  ],
+  "author": "Kenji Doi",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/knjcode/autometa/issues"
+  },
+  "dependencies": {
+    "xlsx": "~0.7.7",
+    "ejs": "~1.0.0",
+    "ect": "~0.5.9"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.7.1",
+    "gulp": "~3.8.6"
+  }
+}
