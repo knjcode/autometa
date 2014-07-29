@@ -1,1 +1,1 @@
-(function(){console.log("Hello autometa!!"),console.log("file name:",process.argv[2]),console.log("options:",process.argv.slice(3,process.argv.length))}).call(this);
+(function(){var e,o,r,s,n,l;s=require("fs"),o=require("ejs"),console.log("Input filename:",process.argv[2]),r=process.argv[2],console.log("options:",process.argv.slice(3,process.argv.length)),e={name:"Kenji Doi",age:"31"},l=s.readFileSync(r,"utf8"),n=o.render(l,e),console.log(n)}).call(this);
