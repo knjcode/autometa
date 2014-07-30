@@ -1,0 +1,1 @@
+(function(){var e,o,s,l,r,c,n,g,i;for(s=require("fs"),c=require("xlsx"),e=require("ejs"),console.log("Input excel filename:",process.argv[2]),o=process.argv[2],console.log("options:",process.argv.slice(3,process.argv.length)),r=c.readFile(o),console.log(r.SheetNames),i=r.SheetNames,n=0,g=i.length;g>n;n++)l=i[n],console.log(l),console.log(JSON.stringify(r.Sheets[l]))}).call(this);

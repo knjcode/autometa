@@ -1,5 +1,6 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
+run = require 'gulp-run'
 
 # compilers
 coffee = require 'gulp-coffee'
@@ -14,5 +15,6 @@ gulp.task 'coffee', ->
 gulp.task 'watch', ->
   gulp.watch './coffee/*.coffee', ['coffee']
 
-gulp.task 'default', ['coffee']
+gulp.task 'default', ['coffee'], ->
+  run('npm test').exec()
 

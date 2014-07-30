@@ -2,9 +2,9 @@
   "name": "autometa",
   "version": "0.0.0",
   "description": "autometa ========",
-  "main": "autometa.js",
+  "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "node index.js test.xlsx"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "coffee-script": "~1.7.1",
     "gulp": "^3.8.6",
     "gulp-coffee": "^2.1.1",
+    "gulp-run": "^1.6.3",
     "gulp-uglify": "^0.3.1",
     "gulp-util": "^3.0.0"
   }
