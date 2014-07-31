@@ -21,9 +21,10 @@
     "url": "https://github.com/knjcode/autometa/issues"
   },
   "dependencies": {
-    "xlsx": "~0.7.7",
+    "ect": "~0.5.9",
     "ejs": "~1.0.0",
-    "ect": "~0.5.9"
+    "xlsjs": "^0.7.1",
+    "xlsx": "~0.7.7"
   },
   "devDependencies": {
     "coffee-script": "~1.7.1",

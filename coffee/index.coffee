@@ -1,13 +1,23 @@
 fs = require 'fs'
+path = require 'path'
 xlsx = require 'xlsx'
+xls = require 'xlsjs'
 ejs = require 'ejs'
 
 console.log "Input excel filename:", process.argv[2]
 excelfile = process.argv[2]
+ext  = path.extname excelfile
+console.log ext
 console.log "options:", process.argv[3...process.argv.length]
 
 # read workbook
-workbook = xlsx.readFile(excelfile)
+if ext is '.xlsx'
+  workbook = xlsx.readFile(excelfile)
+else if ext is '.xls'
+  workbook = xls.readFile excelfile
+else
+  console.log "error. check input filename."
+  return
 
 # loop all sheets
 for sheet in workbook.SheetNames
