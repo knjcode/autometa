@@ -4,16 +4,14 @@ run = require 'gulp-run'
 
 # compilers
 coffee = require 'gulp-coffee'
-uglify = require 'gulp-uglify'
 
 gulp.task 'coffee', ->
-  gulp.src './coffee/*.coffee'
+  gulp.src './src/*.coffee'
     .pipe coffee()
-    .pipe uglify()
-    .pipe gulp.dest './'
+    .pipe gulp.dest './lib'
 
 gulp.task 'watch', ->
-  gulp.watch './coffee/*.coffee', ['coffee']
+  gulp.watch './src/*.coffee', ['coffee']
 
 gulp.task 'default', ['coffee'], ->
   run('npm test').exec()

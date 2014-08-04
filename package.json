@@ -1,10 +1,11 @@
 {
   "name": "autometa",
   "version": "0.0.0",
-  "description": "autometa ========",
-  "main": "index.js",
+  "bin": "./bin/autometa",
+  "description": "Generate various data from Excel spreadsheets",
+  "main": "./lib/autometa.js",
   "scripts": {
-    "test": "node index.js test.xlsx"
+    "test": "node ./bin/autometa test.xlsx"
   },
   "repository": {
     "type": "git",
@@ -12,10 +13,11 @@
   },
   "keywords": [
     "excel",
+    "spreadsheet",
     "data",
     "generate"
   ],
-  "author": "Kenji Doi",
+  "author": "Kenji Doi <knjcode@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/knjcode/autometa/issues"
@@ -28,10 +30,9 @@
   },
   "devDependencies": {
     "coffee-script": "~1.7.1",
-    "gulp": "^3.8.6",
+    "gulp": "^3.8.7",
     "gulp-coffee": "^2.1.1",
     "gulp-run": "^1.6.3",
-    "gulp-uglify": "^0.3.1",
     "gulp-util": "^3.0.0"
   }
 }
