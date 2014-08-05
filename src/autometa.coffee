@@ -4,16 +4,23 @@ xlsx = require 'xlsx'
 xls = require 'xlsjs'
 ejs = require 'ejs'
 
+exports.generateFile = (excelfile) ->
+  [FileName, out] = exports.generate(excelfile)
+
+  fs.writeFileSync(FileName, out)
+  console.log "Writing " + FileName
+  console.log "Finish."
+
 exports.generate = (excelfile) ->
-  ext  = path.extname excelfile
+  ext = path.extname(excelfile)
 
   # read workbook
   if ext is '.xlsx'
     workbook = xlsx.readFile(excelfile)
   else if ext is '.xls'
-    workbook = xls.readFile excelfile
+    workbook = xls.readFile(excelfile)
   else
-    console.log "error. check input filename."
+    console.log "Error. Check input filename."
     return
 
   # loop all sheets
@@ -25,13 +32,13 @@ exports.generate = (excelfile) ->
     id =  worksheet['A1'].w
 
     # make csv filename
-    csvfilename = './' + id + '.csv'
+    csvfilename = './templates/' + id + '.csv'
 
     # make ejs file name
-    ejsfilename = './' + id + '.ejs'
+    ejsfilename = './templates/' + id + '.ejs'
 
     # read csv file
-    csvfile = fs.readFileSync csvfilename, 'utf8'
+    csvfile = fs.readFileSync(csvfilename, 'utf8')
 
     # parse csv
     keymap = []
@@ -48,11 +55,8 @@ exports.generate = (excelfile) ->
       else
         delete keymap[key]
 
-    template = fs.readFileSync ejsfilename, 'utf8'
-    out = ejs.render template, keymap
+    template = fs.readFileSync(ejsfilename, 'utf8')
+    out = ejs.render(template, keymap)
 
-    fs.writeFileSync(keymap['FileName'], out)
-    console.log "Writing " + keymap['FileName']
-
-  console.log "Finish."
+    return [keymap['FileName'], out]
 

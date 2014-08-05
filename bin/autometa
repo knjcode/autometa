@@ -2,5 +2,5 @@
 
 var autometa = require('../lib/autometa.js');
 
-autometa.generate(process.argv[2]);
+autometa.generateFile(process.argv[2]);
 
