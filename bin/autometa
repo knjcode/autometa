@@ -7,12 +7,18 @@ var package = require('../package.json');
 program
   .version(package['version'], '-v, --version')
   .usage('[options] <Excel spreadsheet>')
+  .option('-o, --stdout', 'place output on stdout')
   .parse(process.argv);
+
+var filename = program.args[0];
 
 if(!program.args.length) {
   program.help();
+} else if(program.stdout) {
+  console.log(autometa.generate(filename)[1]);
+  process.exit(0);
 } else {
-  var filename = program.args[0];
   autometa.generateFile(filename);
+  process.exit(0);
 }
 
