@@ -5,23 +5,27 @@ xls = require 'xlsjs'
 ejs = require 'ejs'
 
 exports.generateFile = (excelfile) ->
-  [FileName, out] = exports.generate(excelfile)
-
-  fs.writeFileSync(FileName, out)
-  console.log "Writing " + FileName
-  console.log "Finish."
+  if [FileName, out] = exports.generate(excelfile)
+    fs.writeFileSync(FileName, out)
+    console.log "Writing " + FileName
+    console.log "Finish."
+    return true
+  else
+    return false
 
 exports.generate = (excelfile) ->
   ext = path.extname(excelfile)
 
   # read workbook
-  if ext is '.xlsx'
-    workbook = xlsx.readFile(excelfile)
-  else if ext is '.xls'
-    workbook = xls.readFile(excelfile)
+  if fs.existsSync(excelfile)
+    if ext is '.xlsx'
+      workbook = xlsx.readFile(excelfile)
+    else if ext is '.xls'
+      workbook = xls.readFile(excelfile)
+    else
+      return false
   else
-    console.log "Error. Check input filename."
-    return
+    return false
 
   # loop all sheets
   for sheet in workbook.SheetNames

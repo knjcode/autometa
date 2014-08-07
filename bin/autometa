@@ -15,10 +15,20 @@ var filename = program.args[0];
 if(!program.args.length) {
   program.help();
 } else if(program.stdout) {
-  console.log(autometa.generate(filename)[1]);
-  process.exit(0);
+  output = autometa.generate(filename);
+  if(output) {
+    console.log(output[1]);
+    process.exit(0);
+  } else {
+    console.log("Error. Check input filename.");
+    process.exit(1);
+  }
 } else {
-  autometa.generateFile(filename);
-  process.exit(0);
+  if(autometa.generateFile(filename)) {
+    process.exit(0);
+  } else {
+    console.log("Error. Check input filename.");
+    process.exit(1);
+  }
 }
 

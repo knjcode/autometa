@@ -36,6 +36,7 @@
     "gulp-coffee": "^2.1.1",
     "gulp-mocha": "^0.5.2",
     "gulp-util": "^3.0.0",
-    "run-sequence": "^0.3.6"
+    "run-sequence": "^0.3.6",
+    "sinon": "^1.10.3"
   }
 }
