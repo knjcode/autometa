@@ -17,3 +17,6 @@ describe 'autometa generate function test', ->
   it 'return false if no filename specified', ->
     autometa.generate('').should.to.be.false
 
+  it 'return false if invalid template ID specified in Excel spreadsheet', ->
+    autometa.generate('./test/test-invalid-templateid.xlsx').should.to.be.false
+

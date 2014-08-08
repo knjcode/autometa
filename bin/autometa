@@ -20,14 +20,14 @@ if(!program.args.length) {
     console.log(output[1]);
     process.exit(0);
   } else {
-    console.log("Error. Check input filename.");
+    console.log("Error. Check input file.");
     process.exit(1);
   }
 } else {
   if(autometa.generateFile(filename)) {
     process.exit(0);
   } else {
-    console.log("Error. Check input filename.");
+    console.log("Error. Check input file.");
     process.exit(1);
   }
 }

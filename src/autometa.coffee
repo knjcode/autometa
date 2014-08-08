@@ -37,6 +37,8 @@ exports.generate = (excelfile) ->
 
     # make csv filename
     csvfilename = './templates/' + id + '.csv'
+    if not fs.existsSync(csvfilename)
+      return false
 
     # make ejs file name
     ejsfilename = './templates/' + id + '.ejs'
