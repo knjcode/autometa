@@ -7,13 +7,6 @@ describe 'autometa generateFile function test', ->
 
   sandbox = sinon.sandbox.create()
 
-  it 'return finish message if valid filename specified', ->
-    sandbox.stub(console, 'log')
-    autometa.generateFile('./test/test.xlsx')
-    sinon.assert.calledTwice(console.log)
-    sinon.assert.calledWithExactly(console.log, "Finish.")
-    sandbox.restore()
-
   it 'return true if valid filename specified', ->
     sandbox.stub(console, 'log')
     autometa.generateFile('./test/test.xlsx').should.to.be.true
@@ -21,4 +14,18 @@ describe 'autometa generateFile function test', ->
 
   it 'return false if invalid filename specified', ->
     autometa.generateFile('not-exist-file').should.to.be.false
+
+  it 'return finish message if valid filename specified', ->
+    sandbox.stub(console, 'log')
+    autometa.generateFile('./test/test.xlsx')
+    sinon.assert.calledTwice(console.log)
+    sinon.assert.calledWithExactly(console.log, "Finish.")
+    sandbox.restore()
+
+  it 'return finish message twice if input excel spreadsheet with 2 sheets', ->
+    sandbox.stub(console, 'log')
+    autometa.generateFile('./test/test-2sheets.xlsx')
+    sinon.assert.callCount(console.log, 4)
+    sinon.assert.calledWithExactly(console.log, "Finish.")
+    sandbox.restore()
 

@@ -26,3 +26,5 @@ node_modules
 
 # Test output
 test.xml
+test-*.xml
+
