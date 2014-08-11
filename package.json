@@ -1,6 +1,6 @@
 {
   "name": "autometa",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "bin": "./bin/autometa",
   "description": "Generate various data from Excel spreadsheets",
   "main": "./lib/autometa.js",
