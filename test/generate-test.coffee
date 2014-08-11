@@ -6,7 +6,13 @@ describe 'autometa generate function test', ->
 
   it 'return 1 sheet data if input Excel spreadsheet with 1 sheet', ->
     autometa.generate('./test/test.xlsx').should.deep.equal(
-      [1, [['test.xml', '<person>\n  <name>Kenji Doi</name>\n  <age>31</age>\n</person>\n']]]
+      [1,
+        [
+          ['test.xml',
+           '<person>\n  <name>Kenji Doi</name>\n  <age>31</age>\n</person>\n'
+          ]
+        ]
+      ]
     )
 
   it 'return 2 sheets data if input Excel spreadsheet with 2 sheets', ->
