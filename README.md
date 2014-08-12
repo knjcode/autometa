@@ -2,6 +2,15 @@
 
 Generate various data from Excel spreadsheets.
 
+## Overview
+
+![overview](images/overview.png)
+
+1. Extract 'A1' cell value as Template ID from each Excel worksheet
+2. Extract cell values according to [Template ID].csv
+3. Embed those values into [Template ID].ejs
+4. Save as FileName specified in Excel worksheet
+
 ## Installation
 
 via [npm (node package manager)](http://github.com/isaacs/npm)
