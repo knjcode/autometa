@@ -1,8 +1,10 @@
-<CATALOG>
-  <TITLE><%- Title %></TITLE>
-  <ARTIST><%- Artist %></ARTIST>
-  <COUNTRY><%- Country %></COUNTRY>
-  <COMPANY><%- Company %></COMPANY>
-  <PRICE><%- Price %></PRICE>
-  <YEAR><%- Year %></YEAR>
+<CATALOG><% for (i=0; i<Title.length; i++) { %>
+  <CD>
+    <TITLE><%- Title[i] %></TITLE>
+    <ARTIST><%- Artist[i] %></ARTIST>
+    <COUNTRY><%- Country[i] %></COUNTRY>
+    <COMPANY><%- Company[i] %></COMPANY>
+    <PRICE><%- Price[i] %></PRICE>
+    <YEAR><%- Year[i] %></YEAR>
+  </CD><% } %>
 </CATALOG>

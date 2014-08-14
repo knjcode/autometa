@@ -34,6 +34,65 @@ getEjsFilename = (id) ->
     return false
   return filename
 
+decodeRow = (rowstr) -> parseInt(rowstr, 10) - 1
+
+encodeRow = (row) -> "" + (row + 1)
+
+decodeCol = (colstr) ->
+  i = 0
+  d = 0
+  for i in [0...colstr.length]
+    d = 26*d + colstr.charCodeAt(i) - 64
+  return d - 1
+
+encodeCol = (col) ->
+  s=""
+  col++
+  while col
+    s = String.fromCharCode(((col-1)%26) + 65) + s
+    col = Math.floor((col-1)/26)
+  return s
+
+splitCell = (cellstr) ->
+  return cellstr.replace(/(\$?[A-Z]*)(\$?\d*)/,"$1,$2").split(",")
+
+decodeCell = (cellstr) ->
+  sp = splitCell(cellstr)
+  return { c:decodeCol(sp[0]), r:decodeRow(sp[1]) }
+
+encodeCell = (cell) ->
+  return encodeCol(cell.c) + encodeRow(cell.r)
+
+moveCell = (cellstr, direction) ->
+  cell = decodeCell(cellstr)
+  switch direction
+    when 'up'
+      cell.r -= 1
+    when 'down'
+      cell.r += 1
+    when 'left'
+      cell.c -= 1
+    when 'right'
+      cell.c += 1
+  # Write error handling code when out of range
+
+  return encodeCell(cell)
+
+mapKey = (keymap, worksheet) ->
+  for key, cell of keymap
+    if (worksheet["#{cell}"].w)[0] is '*'
+      repcount = parseInt((worksheet["#{cell}"].w).slice(1))
+      nextcell = cell
+      elementarray = []
+      for i in [0...repcount]
+        nextcell = moveCell(nextcell,"right")
+        elementarray.push(worksheet["#{nextcell}"].w)
+      keymap[key] = elementarray
+    else if key isnt ''
+      keymap[key] = worksheet["#{cell}"].w
+    else if key is ''
+      delete keymap[key]
+  return keymap
 
 exports.generateFile = (excelfile) ->
   if out = exports.generate(excelfile)
@@ -88,12 +147,8 @@ exports.generate = (excelfile) ->
       if data[0] isnt ''
         keymap[data[0]] = data[1]
 
-    # mapping keymap to excel
-    for key, element of keymap
-      if key isnt ''
-        keymap[key] = worksheet["#{element}"].w
-      else
-        delete keymap[key]
+    # map keymap to excel
+    keymap = mapKey(keymap, worksheet)
 
     template = fs.readFileSync(ejsfilename, 'utf8')
     output = ejs.render(template, keymap)
