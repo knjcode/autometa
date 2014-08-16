@@ -4,6 +4,9 @@ xlsx = require 'xlsx'
 xls = require 'xlsjs'
 ejs = require 'ejs'
 
+HORIZONTAL_MARK = '*'
+VERTICAL_MARK = '#'
+
 readExcelFile = (excelfile) ->
   ext = path.extname(excelfile)
 
@@ -39,15 +42,14 @@ decodeRow = (rowstr) -> parseInt(rowstr, 10) - 1
 encodeRow = (row) -> "" + (row + 1)
 
 decodeCol = (colstr) ->
-  i = 0
   d = 0
   for i in [0...colstr.length]
     d = 26*d + colstr.charCodeAt(i) - 64
   return d - 1
 
 encodeCol = (col) ->
-  s=""
-  col++
+  s = ""
+  col += 1
   while col
     s = String.fromCharCode(((col-1)%26) + 65) + s
     col = Math.floor((col-1)/26)
@@ -79,13 +81,27 @@ moveCell = (cellstr, direction) ->
   return encodeCell(cell)
 
 mapKey = (keymap, worksheet) ->
+  # Length of HORIZONTAL_MARK
+  lhm = HORIZONTAL_MARK.length
+  # Length of VERTICAL_MARK
+  lvm = VERTICAL_MARK.length
+
   for key, cell of keymap
-    if (worksheet["#{cell}"].w)[0] is '*'
-      repcount = parseInt((worksheet["#{cell}"].w).slice(1))
+    element = worksheet["#{cell}"].w
+    if element.slice(0,lhm) is HORIZONTAL_MARK
+      repcount = parseInt(element.slice(lhm))
       nextcell = cell
       elementarray = []
       for i in [0...repcount]
         nextcell = moveCell(nextcell,"right")
+        elementarray.push(worksheet["#{nextcell}"].w)
+      keymap[key] = elementarray
+    else if element.slice(0,lvm) is VERTICAL_MARK
+      repcount = parseInt(element.slice(lvm))
+      nextcell = cell
+      elementarray = []
+      for i in [0...repcount]
+        nextcell = moveCell(nextcell,"down")
         elementarray.push(worksheet["#{nextcell}"].w)
       keymap[key] = elementarray
     else if key isnt ''

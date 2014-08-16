@@ -29,7 +29,23 @@ describe 'autometa generate function test', ->
       ]
     )
 
+  it 'return repeat data if elements repeated only horizontally', ->
+    string = autometa.generate('./test/test-repeat.xlsx')[1][0][1]
+    string.should.have.contain('Bob Dylan')
+    string.should.have.contain('Bonnie Tyler')
+    string.should.have.contain('Dolly Parton')
+    string.should.have.contain('Gary Moore')
+    string.should.have.contain('Eros Ramazzotti')
 
+  it 'return repeat data if elements repeated only vertically', ->
+    string = autometa.generate('./test/test-repeat2.xlsx')[1][0][1]
+    string.should.have.contain('Bob Dylan')
+    string.should.have.contain('Bonnie Tyler')
+    string.should.have.contain('Dolly Parton')
+    string.should.have.contain('Gary Moore')
+    string.should.have.contain('Eros Ramazzotti')
+
+  it 'return false if invalid filename specified', ->
   it 'return false if invalid filename specified', ->
     autometa.generate('not-exist-file').should.to.be.false
 
