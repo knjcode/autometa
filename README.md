@@ -35,7 +35,7 @@ test-repeat.xlsx
 
 ![test-repeat.xlsx](images/test-repeat.png)
 
-template/catalog.csv
+templates/catalog.csv
 
     FileName,B2
     Title,B3
@@ -45,7 +45,7 @@ template/catalog.csv
     Price,B7
     Year,B8
 
-template/catalog.ejs
+templates/catalog.ejs
 
     <CATALOG>
     <% for (i=0; i<Title.length; i++) { -%>
@@ -68,7 +68,7 @@ test-repeat2.xlsx
 
 ![test-repeat2.xlsx](images/test-repeat2.png)
 
-template/catalog-v.csv
+templates/catalog-v.csv
 
     FileName,A2
     Title,A4
@@ -78,7 +78,7 @@ template/catalog-v.csv
     Price,E4
     Year,F4
 
-template/catalog-v.ejs (same as catalog.ejs)
+templates/catalog-v.ejs (same as catalog.ejs)
 
     <CATALOG>
     <% for (i=0; i<Title.length; i++) { -%>
@@ -103,7 +103,7 @@ You can generate data from each worksheet of Excel spreadsheet.
 
 ## Original Templates
 
-If you want to define original template, create [Template ID].csv, [Template ID].ejs and place these on templates directory. 
+If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these on templates directory. 
 
 ## Usage manual
 
@@ -135,3 +135,4 @@ Licensed under the [Apache License, Version 2.0][Apache]
 [travis-image]: https://travis-ci.org/knjcode/autometa.svg?branch=master
 [Apache]: http://www.apache.org/licenses/LICENSE-2.0
 [XML Examples]: http://www.w3schools.com/xml/xml_examples.asp
+
