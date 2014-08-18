@@ -1,6 +1,6 @@
 # autometa [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
-Generate various data from Excel spreadsheets.
+Generate various data from Excel spreadsheet.
 
 ## Overview
 
@@ -17,11 +17,93 @@ via [npm (node package manager)](http://github.com/isaacs/npm)
 
     $ npm install -g autometa
 
-## Example
+## Examples
+
+### Basic example
 
 Generate test-note.xml from note-example.xlsx as mentioned in overview above.
 
     $ autometa note-example.xlsx
+
+### Horizontal repetitive elements example
+
+Generate data from Excel spreadsheet includes element repeated horizontally.
+
+    $ autometa test-repeat.xlsx
+
+test-repeat.xlsx
+
+![test-repeat.xlsx](images/test-repeat.png)
+
+template/catalog.csv
+
+    FileName,B2
+    Title,B3
+    Artist,B4
+    Country,B5
+    Company,B6
+    Price,B7
+    Year,B8
+
+template/catalog.ejs
+
+    <CATALOG>
+    <% for (i=0; i<Title.length; i++) { -%>
+      <CD>
+        <TITLE><%- Title[i] %></TITLE>
+        <ARTIST><%- Artist[i] %></ARTIST>
+        <COUNTRY><%- Country[i] %></COUNTRY>
+        <COMPANY><%- Company[i] %></COMPANY>
+        <PRICE><%- Price[i] %></PRICE>
+        <YEAR><%- Year[i] %></YEAR>
+      </CD>
+    <% } -%>
+    </CATALOG>
+
+### Vertical repetitive elements example
+
+Generate data from Excel spreadsheet includes element repeated vertically.
+
+test-repeat2.xlsx
+
+![test-repeat2.xlsx](images/test-repeat2.png)
+
+template/catalog-v.csv
+
+    FileName,A2
+    Title,A4
+    Artist,B4
+    Country,C4
+    Company,D4
+    Price,E4
+    Year,F4
+
+template/catalog-v.ejs (same as catalog.ejs)
+
+    <CATALOG>
+    <% for (i=0; i<Title.length; i++) { -%>
+      <CD>
+        <TITLE><%- Title[i] %></TITLE>
+        <ARTIST><%- Artist[i] %></ARTIST>
+        <COUNTRY><%- Country[i] %></COUNTRY>
+        <COMPANY><%- Company[i] %></COMPANY>
+        <PRICE><%- Price[i] %></PRICE>
+        <YEAR><%- Year[i] %></YEAR>
+      </CD>
+    <% } -%>
+    </CATALOG>
+
+## Horizontal and vertical repetitive elements
+
+Of course, you can generate data from Excel spreadsheet includes elements repeated horizontally and vertically.
+
+## Multiple worksheets
+
+You can generate data from each worksheet of Excel spreadsheet.
+
+## Original Templates
+
+If you want to define original template, create [Template ID].csv, [Template ID].ejs and place these on templates directory. 
 
 ## Usage manual
 
@@ -34,6 +116,14 @@ Generate test-note.xml from note-example.xlsx as mentioned in overview above.
         -v, --version  output the version number
         -o, --stdout   place output on stdout
 
+## Dependencies
+
+commander, ect, ejs, xlsjs, xlsx
+
+## References
+
+Example data in reference to [XML Examples]
+
 ## License
 
 Copyright &copy; 2014 [Kenji Doi (knjcode)](https://github.com/knjcode)  
@@ -44,3 +134,4 @@ Licensed under the [Apache License, Version 2.0][Apache]
 [travis-url]: https://travis-ci.org/knjcode/autometa
 [travis-image]: https://travis-ci.org/knjcode/autometa.svg?branch=master
 [Apache]: http://www.apache.org/licenses/LICENSE-2.0
+[XML Examples]: http://www.w3schools.com/xml/xml_examples.asp

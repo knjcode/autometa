@@ -2,7 +2,7 @@
   "name": "autometa",
   "version": "0.0.2",
   "bin": "./bin/autometa.js",
-  "description": "Generate various data from Excel spreadsheets",
+  "description": "Generate various data from Excel spreadsheet",
   "main": "./lib/autometa.js",
   "scripts": {
     "test": "gulp mocha"
