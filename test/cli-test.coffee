@@ -2,10 +2,10 @@ chai = require 'chai'
 chai.should()
 cp = require 'child_process'
 pack = require '../package.json'
-cmd_version = 'node bin/autometa -v'
-cmd_help = 'node bin/autometa -h'
-cmd_stdout = 'node bin/autometa -o test/test.xlsx'
-cmd_notexistsfile = 'node bin/autometa not-exists-file'
+cmd_version = 'node bin/autometa.js -v'
+cmd_help = 'node bin/autometa.js -h'
+cmd_stdout = 'node bin/autometa.js -o test/test.xlsx'
+cmd_notexistsfile = 'node bin/autometa.js not-exists-file'
 
 # Fix the problem that cannot capture
 # a child process's stdout and stderr in Windows
