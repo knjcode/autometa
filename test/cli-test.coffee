@@ -17,24 +17,24 @@ exit = (exitCode) ->
   else
     process.exit(exitCode)
 
-describe 'autometa command-line interface test', ->
+describe 'autometa command-line interface should return', ->
 
-  it 'return version if -v option specified', (done) =>
+  it 'version if -v option specified', (done) =>
     cp.exec cmd_version, (error, stdout, stderr) =>
       stdout.toString().should.string(pack['version'])
       done()
 
-  it 'return help message if -h option specified', (done) =>
+  it 'help message if -h option specified', (done) =>
     cp.exec cmd_help, (error, stdout, stderr) =>
       stdout.toString().should.string('help')
       done()
 
-  it 'return output to stdout if -o option specified', (done) =>
+  it 'output to stdout if -o option specified', (done) =>
     cp.exec cmd_stdout, (error, stdout, stderr) =>
       stdout.toString().should.string('test.xml')
       done()
 
-  it 'return error messsage if not exists file specified', (done) =>
+  it 'error messsage if not exists file specified', (done) =>
     cp.exec cmd_notexistsfile, (error, stdout, stderr) =>
       stdout.toString().should.equal('Error. Check input file.\n')
       done()

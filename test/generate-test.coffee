@@ -2,9 +2,9 @@ chai = require 'chai'
 chai.should()
 autometa = require '../src/autometa.coffee'
 
-describe 'autometa generate function test', ->
+describe 'autometa generate function should return', ->
 
-  it 'return 1 sheet data if input Excel spreadsheet with 1 sheet', ->
+  it '1 sheet data if input Excel spreadsheet with 1 sheet', ->
     autometa.generate('./test/test.xlsx').should.deep.equal(
       [1,
         [
@@ -15,7 +15,7 @@ describe 'autometa generate function test', ->
       ]
     )
 
-  it 'return 2 sheets data if input Excel spreadsheet with 2 sheets', ->
+  it '2 sheets data if input Excel spreadsheet with 2 sheets', ->
     autometa.generate('./test/test-2sheets.xlsx').should.deep.equal(
       [2,
         [
@@ -29,7 +29,7 @@ describe 'autometa generate function test', ->
       ]
     )
 
-  it 'return repeat data if elements repeated only horizontally', ->
+  it 'repeat data if elements repeated only horizontally', ->
     string = autometa.generate('./test/test-repeat.xlsx')[1][0][1]
     string.should.have.contain('Bob Dylan')
     string.should.have.contain('Bonnie Tyler')
@@ -37,7 +37,7 @@ describe 'autometa generate function test', ->
     string.should.have.contain('Gary Moore')
     string.should.have.contain('Eros Ramazzotti')
 
-  it 'return repeat data if elements repeated only vertically', ->
+  it 'repeat data if elements repeated only vertically', ->
     string = autometa.generate('./test/test-repeat2.xlsx')[1][0][1]
     string.should.have.contain('Bob Dylan')
     string.should.have.contain('Bonnie Tyler')
@@ -45,13 +45,12 @@ describe 'autometa generate function test', ->
     string.should.have.contain('Gary Moore')
     string.should.have.contain('Eros Ramazzotti')
 
-  it 'return false if invalid filename specified', ->
-  it 'return false if invalid filename specified', ->
+  it 'false if invalid filename specified', ->
     autometa.generate('not-exist-file').should.to.be.false
 
-  it 'return false if no filename specified', ->
+  it 'false if no filename specified', ->
     autometa.generate('').should.to.be.false
 
-  it 'return false if invalid template ID specified in Excel spreadsheet', ->
+  it 'false if invalid template ID specified in Excel spreadsheet', ->
     autometa.generate('./test/test-invalid-templateid.xlsx').should.to.be.false
 

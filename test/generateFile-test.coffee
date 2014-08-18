@@ -3,26 +3,26 @@ chai.should()
 sinon = require 'sinon'
 autometa = require '../src/autometa.coffee'
 
-describe 'autometa generateFile function test', ->
+describe 'autometa generateFile function should return', ->
 
   sandbox = sinon.sandbox.create()
 
-  it 'return true if valid filename specified', ->
+  it 'true if valid filename specified', ->
     sandbox.stub(console, 'log')
     autometa.generateFile('./test/test.xlsx').should.to.be.true
     sandbox.restore()
 
-  it 'return false if invalid filename specified', ->
+  it 'false if invalid filename specified', ->
     autometa.generateFile('not-exist-file').should.to.be.false
 
-  it 'return finish message if valid filename specified', ->
+  it 'finish message if valid filename specified', ->
     sandbox.stub(console, 'log')
     autometa.generateFile('./test/test.xlsx')
     sinon.assert.calledTwice(console.log)
     sinon.assert.calledWithExactly(console.log, "Finish.")
     sandbox.restore()
 
-  it 'return finish message twice if input excel spreadsheet with 2 sheets', ->
+  it 'finish message twice if input excel spreadsheet with 2 sheets', ->
     sandbox.stub(console, 'log')
     autometa.generateFile('./test/test-2sheets.xlsx')
     sinon.assert.callCount(console.log, 4)
