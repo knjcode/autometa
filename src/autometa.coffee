@@ -26,7 +26,7 @@ readExcelFile = (excelfile) ->
     else if ext is '.xls'
       workbook = xls.readFile(excelfile)
     else
-      retur false
+      return false
   else
     return false
   return workbook
