@@ -14,7 +14,7 @@ TEMPLATES_DIRS = ['./templates']
 # if NODE_AM_TEMPLATES is set, add specified directories into TEMPLATES_DIRS
 templates_dirs = process.env.NODE_AM_TEMPLATES
 if(templates_dirs)
-  TEMPLATES_DIRS = TEMPLATES_DIRS.concat(templates_dirs.split(':'))
+  TEMPLATES_DIRS = templates_dirs.split(':').concat(TEMPLATES_DIRS)
 
 
 readExcelFile = (excelfile) ->
