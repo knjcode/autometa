@@ -12,30 +12,30 @@ cmd_notexistsfile = 'node bin/autometa.js not-exists-file'
 # https://gist.github.com/cowboy/3427148
 exit = (exitCode) ->
   if (process.stdout._pendingWriteReqs || process.stderr._pendingWriteReqs)
-    process.nextTick =>
+    process.nextTick ->
       exit(exitCode)
   else
     process.exit(exitCode)
 
 describe 'autometa command-line interface should return', ->
 
-  it 'version if -v option specified', (done) =>
-    cp.exec cmd_version, (error, stdout, stderr) =>
+  it 'version if -v option specified', (done) ->
+    cp.exec cmd_version, (error, stdout, stderr) ->
       stdout.toString().should.string(pack['version'])
       done()
 
-  it 'help message if -h option specified', (done) =>
-    cp.exec cmd_help, (error, stdout, stderr) =>
+  it 'help message if -h option specified', (done) ->
+    cp.exec cmd_help, (error, stdout, stderr) ->
       stdout.toString().should.string('help')
       done()
 
-  it 'output to stdout if -o option specified', (done) =>
-    cp.exec cmd_stdout, (error, stdout, stderr) =>
+  it 'output to stdout if -o option specified', (done) ->
+    cp.exec cmd_stdout, (error, stdout, stderr) ->
       stdout.toString().should.string('test.xml')
       done()
 
-  it 'error messsage if not exists file specified', (done) =>
-    cp.exec cmd_notexistsfile, (error, stdout, stderr) =>
+  it 'error messsage if not exists file specified', (done) ->
+    cp.exec cmd_notexistsfile, (error, stdout, stderr) ->
       stdout.toString().should.equal('Error. Check input file.\n')
       done()
 
