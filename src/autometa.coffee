@@ -4,12 +4,21 @@ xlsx = require 'xlsx'
 xls = require 'xlsjs'
 ejs = require 'ejs'
 
+# Default horizontal and vertical mark
 HORIZONTAL_MARK = '*'
 VERTICAL_MARK = '#'
 
+# Default templates directory is './templates'
+TEMPLATES_DIRS = ['./templates']
+
+# if NODE_AM_TEMPLATES is set, add specified directories into TEMPLATES_DIRS
+templates_dirs = process.env.NODE_AM_TEMPLATES
+if(templates_dirs)
+  TEMPLATES_DIRS = TEMPLATES_DIRS.concat(templates_dirs.split(':'))
+
+
 readExcelFile = (excelfile) ->
   ext = path.extname(excelfile)
-
   # read workbook
   if fs.existsSync(excelfile)
     if ext is '.xlsx'
@@ -20,22 +29,21 @@ readExcelFile = (excelfile) ->
       retur false
   else
     return false
-
   return workbook
 
-
 getCsvFilename = (id) ->
-  filename = './templates/' + id + '.csv'
-  if not fs.existsSync(filename)
-    return false
-  return filename
-
+  for dir in TEMPLATES_DIRS
+    filename = path.resolve(dir, id + '.csv')
+    if fs.existsSync(filename)
+      return filename
+  return false
 
 getEjsFilename = (id) ->
-  filename = './templates/' + id + '.ejs'
-  if not fs.existsSync(filename)
-    return false
-  return filename
+  for dir in TEMPLATES_DIRS
+    filename = path.resolve(dir, id + '.ejs')
+    if fs.existsSync(filename)
+      return filename
+  return false
 
 decodeRow = (rowstr) -> parseInt(rowstr, 10) - 1
 
@@ -110,6 +118,14 @@ mapKey = (keymap, worksheet) ->
       delete keymap[key]
   return keymap
 
+exports.registerCsv = (csvfile) ->
+  console.log 'registerCsv'
+  # WIP
+
+exports.registerEjs = (ejsfile) ->
+  console.log 'registerEjs'
+  # WIP
+
 exports.generateFile = (excelfile) ->
   if out = exports.generate(excelfile)
     sheetnum = out[0]
@@ -121,7 +137,6 @@ exports.generateFile = (excelfile) ->
       fs.writeFileSync(FileName, output)
       console.log "Writing " + FileName
       console.log "Finish."
-
     return true
   else
     return false
