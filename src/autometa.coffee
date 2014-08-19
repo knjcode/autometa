@@ -18,9 +18,10 @@ if(templates_dirs)
 
 
 readExcelFile = (excelfile) ->
-  ext = path.extname(excelfile)
-  # read workbook
+  excelfile = path.resolve(excelfile)
+  # read excelfile
   if fs.existsSync(excelfile)
+    ext = path.extname(excelfile)
     if ext is '.xlsx'
       workbook = xlsx.readFile(excelfile)
     else if ext is '.xls'
@@ -30,6 +31,24 @@ readExcelFile = (excelfile) ->
   else
     return false
   return workbook
+
+exports.registerTemplates = (templates) ->
+  for template in templates
+    template = path.resolve(template)
+    filename = path.basename(template)
+    console.log 'Registering: ' + filename
+    # read template
+    if fs.existsSync(template)
+      ext = path.extname(template)
+      console.log 'Templates dir: ' + TEMPLATES_DIRS
+      if ext is '.csv'
+        console.log 'register file is csv'
+      else if ext is '.ejs'
+        console.log 'register file is ejs'
+      else
+        console.log 'Error. ' + filename + ' is not template'
+    else
+      console.log 'Input file does not exist'
 
 getCsvFilename = (id) ->
   for dir in TEMPLATES_DIRS
@@ -44,6 +63,14 @@ getEjsFilename = (id) ->
     if fs.existsSync(filename)
       return filename
   return false
+
+registerCsv = (csvfile) ->
+  console.log 'registerCsv'
+  # WIP
+
+registerEjs = (ejsfile) ->
+  console.log 'registerEjs'
+  # WIP
 
 decodeRow = (rowstr) -> parseInt(rowstr, 10) - 1
 
@@ -118,21 +145,15 @@ mapKey = (keymap, worksheet) ->
       delete keymap[key]
   return keymap
 
-exports.registerCsv = (csvfile) ->
-  console.log 'registerCsv'
-  # WIP
-
-exports.registerEjs = (ejsfile) ->
-  console.log 'registerEjs'
-  # WIP
-
 exports.generateFile = (excelfile) ->
-  if out = exports.generate(excelfile)
+  out = exports.generate(excelfile)
+  if out
     sheetnum = out[0]
     outputs = out[1]
 
     for i in [0...sheetnum]
-      [FileName, output] = outputs[i]
+      FileName = outputs[i][0]
+      output = outputs[i][1]
 
       fs.writeFileSync(FileName, output)
       console.log "Writing " + FileName
@@ -154,8 +175,8 @@ exports.generate = (excelfile) ->
 
     worksheet = workbook.Sheets[sheet]
 
-    # read template ID  
-    id = worksheet['A1'].w
+    # read template ID
+    id = worksheet.A1.w
 
     # make csv filename
     csvfilename = getCsvFilename(id)
@@ -184,7 +205,7 @@ exports.generate = (excelfile) ->
     template = fs.readFileSync(ejsfilename, 'utf8')
     output = ejs.render(template, keymap)
 
-    outputs.push [keymap['FileName'], output]
+    outputs.push [keymap.FileName, output]
 
   return [sheetnum, outputs]
 

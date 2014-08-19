@@ -5,18 +5,19 @@ var autometa = require('../lib/autometa.js');
 var package = require('../package.json');
 
 program
-  .version(package['version'], '-v, --version')
+  .version(package.version, '-v, --version')
   .usage('[options] <Excel spreadsheet>')
   .option('-o, --stdout', 'place output on stdout')
   .option('-r, --register <template file>', 'register templates', String)
   .parse(process.argv);
 
-var templates = []
+var templates = [];
 
 if(!program.args.length) { // No filename found
   if(program.register) {
     templates.push(program.register);
-    console.log("register: " + templates);
+    console.log("Input templates: " + templates);
+    autometa.registerTemplates(templates);
     process.exit(0);
   } else {
     program.help();
@@ -34,7 +35,8 @@ if(!program.args.length) { // No filename found
   } else if(program.register) { // Count strings as templates
     templates.push(program.register);
     templates = templates.concat(program.args);
-    console.log("register: " + templates);
+    console.log("Input templates: " + templates);
+    autometa.registerTemplates(templates);
     process.exit(0);
   } else {
     // Only filename specified
