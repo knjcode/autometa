@@ -24,17 +24,17 @@
   },
   "dependencies": {
     "commander": "^2.3.0",
-    "ect": "~0.5.9",
-    "ejs": "~1.0.0",
+    "ect": "^0.5.9",
+    "ejs": "^1.0.0",
     "xlsjs": "^0.7.1",
-    "xlsx": "~0.7.7"
+    "xlsx": "^0.7.8"
   },
   "devDependencies": {
     "chai": "^1.9.1",
-    "coffee-script": "~1.7.1",
+    "coffee-script": "^1.7.1",
     "gulp": "^3.8.7",
     "gulp-coffee": "^2.1.1",
-    "gulp-mocha": "^0.5.2",
+    "gulp-mocha": "^1.0.0",
     "gulp-util": "^3.0.0",
     "run-sequence": "^0.3.6",
     "sinon": "^1.10.3"
