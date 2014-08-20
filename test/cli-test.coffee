@@ -7,16 +7,6 @@ cmd_help = 'node bin/autometa.js -h'
 cmd_stdout = 'node bin/autometa.js -o test/test.xlsx'
 cmd_notexistsfile = 'node bin/autometa.js not-exists-file'
 
-# Fix the problem that cannot capture
-# a child process's stdout and stderr in Windows
-# https://gist.github.com/cowboy/3427148
-exit = (exitCode) ->
-  if (process.stdout._pendingWriteReqs || process.stderr._pendingWriteReqs)
-    process.nextTick ->
-      exit(exitCode)
-  else
-    process.exit(exitCode)
-
 describe 'autometa command-line interface should return', ->
 
   it 'version if -v option specified', (done) ->
