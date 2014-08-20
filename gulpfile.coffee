@@ -1,5 +1,6 @@
 gulp = require 'gulp'
-gutil = require 'gulp-util'
+jshint = require 'gulp-jshint'
+coffeelint = require 'gulp-coffeelint'
 mocha = require 'gulp-mocha'
 runSequence = require 'run-sequence'
 
@@ -11,6 +12,16 @@ gulp.task 'coffee', ->
     .pipe coffee()
     .pipe gulp.dest './lib'
 
+gulp.task 'coffeelint', ->
+  gulp.src ['./src/*.coffee', './test/*.coffee']
+    .pipe coffeelint()
+    .pipe coffeelint.reporter()
+
+gulp.task 'jshint', ->
+  gulp.src ['./bin/*.js', './lib/*.js']
+    .pipe jshint()
+    .pipe jshint.reporter()
+
 gulp.task 'watch', ->
   gulp.watch './src/*.coffee', ['coffee']
 
@@ -19,5 +30,5 @@ gulp.task 'mocha', ->
     .pipe mocha {reporter: 'spec'}
 
 gulp.task 'default', ->
-  runSequence 'coffee', 'mocha'
+  runSequence ['coffeelint', 'jshint'], 'coffee', 'mocha'
 
