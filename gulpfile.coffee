@@ -9,6 +9,8 @@ coffee = require 'gulp-coffee'
 
 gulp.task 'coffee', ->
   gulp.src './src/*.coffee'
+    .pipe coffeelint()
+    .pipe coffeelint.reporter()
     .pipe coffee()
     .pipe gulp.dest './lib'
 
