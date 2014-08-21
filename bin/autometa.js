@@ -23,7 +23,6 @@ var templates = [];
 if(!program.args.length) { // No filename found
   if(program.register) {
     templates.push(program.register);
-    console.log("Input templates: " + templates);
     autometa.registerTemplates(templates);
     process.exit(0);
   } else {
@@ -42,7 +41,6 @@ if(!program.args.length) { // No filename found
   } else if(program.register) { // Count strings as templates
     templates.push(program.register);
     templates = templates.concat(program.args);
-    console.log("Input templates: " + templates);
     autometa.registerTemplates(templates);
     process.exit(0);
   } else {
