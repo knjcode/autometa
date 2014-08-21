@@ -21,7 +21,7 @@ via [npm (node package manager)](http://github.com/isaacs/npm)
 
 ### Basic example
 
-Generate test-note.xml from note-example.xlsx as mentioned in overview above.
+Generate data from note-example.xlsx as mentioned in overview above.
 
     $ autometa note-example.xlsx
 
@@ -35,7 +35,7 @@ test-repeat.xlsx
 
 ![test-repeat.xlsx](images/test-repeat.png)
 
-templates/catalog.csv
+catalog.csv
 
     FileName,B2
     Title,B3
@@ -45,7 +45,7 @@ templates/catalog.csv
     Price,B7
     Year,B8
 
-templates/catalog.ejs
+catalog.ejs
 
     <CATALOG>
     <% for (i=0; i<Title.length; i++) { -%>
@@ -68,7 +68,7 @@ test-repeat2.xlsx
 
 ![test-repeat2.xlsx](images/test-repeat2.png)
 
-templates/catalog-v.csv
+catalog-v.csv
 
     FileName,A2
     Title,A4
@@ -78,7 +78,7 @@ templates/catalog-v.csv
     Price,E4
     Year,F4
 
-templates/catalog-v.ejs (same as catalog.ejs)
+catalog-v.ejs (same as catalog.ejs)
 
     <CATALOG>
     <% for (i=0; i<Title.length; i++) { -%>
@@ -93,7 +93,7 @@ templates/catalog-v.ejs (same as catalog.ejs)
     <% } -%>
     </CATALOG>
 
-## Horizontal and vertical repetitive elements
+### Horizontal and vertical repetitive elements
 
 Of course, you can generate data from Excel spreadsheet includes elements repeated horizontally and vertically.
 
@@ -103,20 +103,21 @@ You can generate data from each worksheet of Excel spreadsheet.
 
 ## Templates directory
 
-Autometa search templates in the current directory of input file first.
-If templates not found, it search default templates directory.
+Autometa search templates ([Template ID].csv and [Template ID].ejs) in the current directory of input file first.
+If templates not found, search default templates directory ([autometa package directory]/templates).
 If you want to add templates directory, set AUTOMETA_TEMPLATES environment variable.
 
     $ export AUTOMETA_TEMPLATES="/path/to/your/templates"
 
 ## Original Templates
 
-If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these on templates directory. 
+If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these files on templates directory. 
 
-You can also place templates by command.
+You can also place templates by register command.
 
-    $ autometa -r [Template ID].ejs
-    $ Register success: [Template ID].ejs placed on [templates direcotry]
+    $ autometa -r [Template ID].ejs [Template ID].csv
+    $ Register success: [Template ID].ejs placed on [templates directory]
+    $ Register success: [Template ID].csv placed on [templates directory]
 
 ## Usage manual
 
@@ -153,4 +154,3 @@ Licensed under the [Apache License, Version 2.0][Apache]
 [travis-image]: https://travis-ci.org/knjcode/autometa.svg?branch=master
 [Apache]: http://www.apache.org/licenses/LICENSE-2.0
 [XML Examples]: http://www.w3schools.com/xml/xml_examples.asp
-
