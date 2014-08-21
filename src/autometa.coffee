@@ -16,11 +16,14 @@ templates_dirs = process.env.AUTOMETA_TEMPLATES
 if(templates_dirs)
   TEMPLATES_DIRS = templates_dirs.split(':').concat(TEMPLATES_DIRS)
 
+# Directory of input file
+file_dir = ''
 
 readExcelFile = (excelfile) ->
   excelfile = path.resolve(excelfile)
   # read excelfile
   if fs.existsSync(excelfile)
+    file_dir = excelfile
     ext = path.extname(excelfile)
     if ext is '.xlsx'
       workbook = xlsx.readFile(excelfile)
@@ -29,6 +32,7 @@ readExcelFile = (excelfile) ->
     else
       return false
   else
+    file_dir = ''
     return false
   return workbook
 
@@ -58,18 +62,17 @@ exports.registerTemplates = (templates) ->
     else
       console.log 'Error. Input file does not exist.'
 
-getCsvFilename = (id) ->
-  for dir in TEMPLATES_DIRS
-    filename = path.resolve(dir, id + '.csv')
-    if fs.existsSync(filename)
-      return filename
-  return false
+getTemplateFilePath = (id, ext) ->
+  # Search input file directory
+  filepath = path.resolve(file_dir, id + ext)
+  if fs.existsSync(filepath)
+    return filepath
 
-getEjsFilename = (id) ->
+  # Search TEMPLATE_DIRS
   for dir in TEMPLATES_DIRS
-    filename = path.resolve(dir, id + '.ejs')
-    if fs.existsSync(filename)
-      return filename
+    filepath = path.resolve(dir, id + ext)
+    if fs.existsSync(filepath)
+      return filepath
   return false
 
 decodeRow = (rowstr) -> parseInt(rowstr, 10) - 1
@@ -179,12 +182,12 @@ exports.generate = (excelfile) ->
     id = worksheet.A1.w
 
     # make csv filename
-    csvfilename = getCsvFilename(id)
+    csvfilename = getTemplateFilePath(id, '.csv')
     if not csvfilename
       return false
 
     # make ejs file name
-    ejsfilename = getEjsFilename(id)
+    ejsfilename = getTemplateFilePath(id, '.ejs')
     if not ejsfilename
       return false
 

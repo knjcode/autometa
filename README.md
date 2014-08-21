@@ -103,13 +103,17 @@ You can generate data from each worksheet of Excel spreadsheet.
 
 ## Templates directory
 
-If you want to change templates directory, set AUTOMETA_TEMPLATES environment variable.
+Autometa search templates in the current directory of input file first.
+If templates not found, it search default templates directory.
+If you want to add templates directory, set AUTOMETA_TEMPLATES environment variable.
 
     $ export AUTOMETA_TEMPLATES="/path/to/your/templates"
 
 ## Original Templates
 
 If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these on templates directory. 
+
+You can also place templates by command.
 
     $ autometa -r [Template ID].ejs
     $ Register success: [Template ID].ejs placed on [templates direcotry]
