@@ -11,8 +11,8 @@ VERTICAL_MARK = '#'
 # Default templates directory is './templates'
 TEMPLATES_DIRS = ['./templates']
 
-# if NODE_AM_TEMPLATES is set, add specified directories into TEMPLATES_DIRS
-templates_dirs = process.env.NODE_AM_TEMPLATES
+# if AUTOMETA_TEMPLATES is set, add specified directories into TEMPLATES_DIRS
+templates_dirs = process.env.AUTOMETA_TEMPLATES
 if(templates_dirs)
   TEMPLATES_DIRS = templates_dirs.split(':').concat(TEMPLATES_DIRS)
 
