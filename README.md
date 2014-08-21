@@ -101,20 +101,34 @@ Of course, you can generate data from Excel spreadsheet includes elements repeat
 
 You can generate data from each worksheet of Excel spreadsheet.
 
+## Templates directory
+
+If you want to change templates directory, set AUTOMETA_TEMPLATES environment variable.
+
+    $ export AUTOMETA_TEMPLATES="/path/to/your/templates"
+
 ## Original Templates
 
 If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these on templates directory. 
+
+    $ autometa -r [Template ID].ejs
+    $ Register success: [Template ID].ejs placed on [templates direcotry]
 
 ## Usage manual
 
     $ autometa -h
       Usage: autometa [options] <Excel spreadsheet>
-      
+
       Options:
-      
-        -h, --help     output usage information
-        -v, --version  output the version number
-        -o, --stdout   place output on stdout
+
+        -h, --help                      output usage information
+        -v, --version                   output the version number
+        -o, --stdout                    place output on stdout
+        -r, --register <template file>  register templates
+    
+    Environment variable:
+    AUTOMETA_TEMPLATES         Set ':'-separeted list of directories,
+                               if you want to change templates directory.
 
 ## Dependencies
 
