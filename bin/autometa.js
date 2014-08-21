@@ -8,8 +8,15 @@ program
   .version(package.version, '-v, --version')
   .usage('[options] <Excel spreadsheet>')
   .option('-o, --stdout', 'place output on stdout')
-  .option('-r, --register <template file>', 'register templates', String)
-  .parse(process.argv);
+  .option('-r, --register <template file>', 'register templates', String);
+
+program.on('--help', function () {
+  console.log("  Environment variable:");
+  console.log("  NODE_AM_TEMPLATES        Set ':'-separeted list of directories,");
+  console.log("                           If you want to change templates directory.");
+});
+
+program.parse(process.argv);
 
 var templates = [];
 
