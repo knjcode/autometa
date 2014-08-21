@@ -32,23 +32,31 @@ readExcelFile = (excelfile) ->
     return false
   return workbook
 
+registerTemplate = (template, filename) ->
+  # copy template file to template path
+  for template_dir in TEMPLATES_DIRS
+    template_dir = path.resolve(template_dir)
+    if fs.existsSync(template_dir)
+      targetFile = path.join(template_dir,filename)
+      fs.writeFileSync(targetFile, fs.readFileSync(template))
+      console.log 'Register success: ' + filename + ' placed on ' + template_dir
+      return true
+  return false
+
 exports.registerTemplates = (templates) ->
   for template in templates
     template = path.resolve(template)
     filename = path.basename(template)
-    console.log 'Registering: ' + filename
-    # read template
+    
     if fs.existsSync(template)
       ext = path.extname(template)
-      console.log 'Templates dir: ' + TEMPLATES_DIRS
-      if ext is '.csv'
-        console.log 'register file is csv'
-      else if ext is '.ejs'
-        console.log 'register file is ejs'
+      if ext is '.csv' or ext is '.ejs'
+        if not registerTemplate(template, filename)
+          console.log 'Error. Can not write file.'
       else
-        console.log 'Error. ' + filename + ' is not template'
+        console.log 'Error. ' + filename + ' is not template.'
     else
-      console.log 'Input file does not exist'
+      console.log 'Error. Input file does not exist.'
 
 getCsvFilename = (id) ->
   for dir in TEMPLATES_DIRS
@@ -63,14 +71,6 @@ getEjsFilename = (id) ->
     if fs.existsSync(filename)
       return filename
   return false
-
-registerCsv = (csvfile) ->
-  console.log 'registerCsv'
-  # WIP
-
-registerEjs = (ejsfile) ->
-  console.log 'registerEjs'
-  # WIP
 
 decodeRow = (rowstr) -> parseInt(rowstr, 10) - 1
 
