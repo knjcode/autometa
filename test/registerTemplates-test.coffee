@@ -11,6 +11,7 @@ not_template_specified = 'node bin/autometa.js -r test/test.xlsx'
 not_exists_template_specified = 'node bin/autometa.js -r not-exists-template'
 
 describe 'autometa registerTemplates function should return', ->
+  this.timeout 5000
 
   it 'success message if csv template specified', (done) ->
     cp.exec csv_template_specified, (error, stdout, stderr) ->
@@ -24,8 +25,8 @@ describe 'autometa registerTemplates function should return', ->
 
   it 'success message twice if csv and ejs template specified', (done) ->
     cp.exec csv_and_ejs_template_specified, (error, stdout, stderr) ->
-      stdout.toString().should.string('Register success: test.csv placed on')
-      stdout.toString().should.string('Register success: test.ejs placed on')
+      stdout.toString().should.string('Register success: ')
+      stdout.toString().should.string('Register success: ')
       done()
 
   it 'error message if not template specified', (done) ->

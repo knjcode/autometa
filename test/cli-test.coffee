@@ -8,6 +8,7 @@ cmd_stdout = 'node bin/autometa.js -o test/test.xlsx'
 cmd_notexistsfile = 'node bin/autometa.js not-exists-file'
 
 describe 'autometa command-line interface should return', ->
+  this.timeout 5000
 
   it 'version if -v option specified', (done) ->
     cp.exec cmd_version, (error, stdout, stderr) ->
