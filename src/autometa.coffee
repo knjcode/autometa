@@ -114,7 +114,11 @@ moveCell = (cellstr, direction) ->
       cell.c -= 1
     when 'right'
       cell.c += 1
-  # Write error handling code when out of range
+
+  if not (0 <= cell.r < 1048576)
+    return false
+  if not (0 <= cell.c < 16384)
+    return false
 
   return encodeCell(cell)
 
@@ -132,7 +136,10 @@ mapKey = (keymap, worksheet) ->
       elementarray = []
       for i in [0...repcount]
         nextcell = moveCell(nextcell,"right")
-        elementarray.push(worksheet["#{nextcell}"].w)
+        if nextcell
+          elementarray.push(worksheet["#{nextcell}"].w)
+        else
+          return false
       keymap[key] = elementarray
     else if element.slice(0,lvm) is VERTICAL_MARK
       repcount = parseInt(element.slice(lvm))
@@ -140,7 +147,10 @@ mapKey = (keymap, worksheet) ->
       elementarray = []
       for i in [0...repcount]
         nextcell = moveCell(nextcell,"down")
-        elementarray.push(worksheet["#{nextcell}"].w)
+        if nextcell
+          elementarray.push(worksheet["#{nextcell}"].w)
+        else
+          return false
       keymap[key] = elementarray
     else if key isnt ''
       keymap[key] = worksheet["#{cell}"].w
@@ -204,6 +214,8 @@ exports.generate = (excelfile) ->
 
     # map keymap to excel
     keymap = mapKey(keymap, worksheet)
+    if not keymap
+      return false
 
     template = fs.readFileSync(ejsfilename, 'utf8')
     output = ejs.render(template, keymap)
