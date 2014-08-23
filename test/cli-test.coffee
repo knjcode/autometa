@@ -22,7 +22,9 @@ describe 'autometa command-line interface should return', ->
 
   it 'output to stdout if -o option specified', (done) ->
     cp.exec cmd_stdout, (error, stdout, stderr) ->
-      stdout.toString().should.string('test.xml')
+      stdout.toString().should.string(
+        '<person>\n  <name>Kenji Doi</name>\n  <age>31</age>\n</person>'
+      )
       done()
 
   it 'error messsage if not exists file specified', (done) ->

@@ -7,7 +7,7 @@ var package = require('../package.json');
 program
   .version(package.version, '-v, --version')
   .usage('[options] <Excel spreadsheet>')
-  .option('-o, --stdout', 'place output on stdout')
+  .option('-o, --stdout', 'place output of first sheet on stdout')
   .option('-r, --register <template file>', 'register templates', String);
 
 program.on('--help', function () {
@@ -32,7 +32,7 @@ if(!program.args.length) { // No filename found
   if(program.stdout) {
     output = autometa.generate(program.args[0]);
     if(output) {
-      console.log(output[1]); // Print only 1st data
+      console.log(output[1][0][1]); // Print only output of first sheet
       process.exit(0);
     } else {
       console.log("Error. Check input file.");
