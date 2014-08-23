@@ -197,8 +197,8 @@ exports.generate = (excelfile) ->
     # parse csv
     keymap = []
     rowData = csvfile.split(String.fromCharCode(10))
-    for i in [0...rowData.length]
-      data = rowData[i].split(',')
+    for d in rowData
+      data = d.split(',')
       if data[0] isnt ''
         keymap[data[0]] = data[1]
 
