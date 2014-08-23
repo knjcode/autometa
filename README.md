@@ -9,7 +9,7 @@ Generate various data from Excel spreadsheet.
 1. Extract "A1" cell value as "Template ID" from each Excel worksheet
 2. Extract all cells value according to [Template ID].csv
 3. Embed these values into [Template ID].ejs
-4. Save as FileName specified in Excel worksheet
+4. Save as FileName specified in an Excel worksheet
 
 ## Installation
 
@@ -21,13 +21,13 @@ via [npm (node package manager)](http://github.com/isaacs/npm)
 
 ### Basic example
 
-Generate data from note-example.xlsx as mentioned in overview above.
+Generate data from note-example.xlsx as mentioned in the overview above.
 
     $ autometa note-example.xlsx
 
 ### Horizontal repetitive elements example
 
-Generate data from Excel spreadsheet includes element repeated horizontally.
+Generate data from Excel spreadsheet includes an element repeated horizontally.
 
     $ autometa test-repeat.xlsx
 
@@ -62,7 +62,7 @@ catalog.ejs
 
 ### Vertical repetitive elements example
 
-Generate data from Excel spreadsheet includes element repeated vertically.
+Generate data from Excel spreadsheet includes an element repeated vertically.
 
 test-repeat2.xlsx
 
@@ -99,7 +99,7 @@ Of course, you can generate data from Excel spreadsheet includes elements repeat
 
 ## Multiple worksheets
 
-You can generate data from each worksheet of Excel spreadsheet.
+You can get data from each worksheet of Excel spreadsheets.
 
 ## Templates directory
 
@@ -111,7 +111,7 @@ If you want to add templates directory, set AUTOMETA_TEMPLATES environment varia
 
 ## Original Templates
 
-If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these files on templates directory. 
+If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these files in the templates directory. 
 
 You can also place templates by register command.
 
@@ -128,7 +128,7 @@ You can also place templates by register command.
 
         -h, --help                      output usage information
         -v, --version                   output the version number
-        -o, --stdout                    place output on stdout
+        -o, --stdout                    place output of first sheet on stdout
         -r, --register <template file>  register templates
     
     Environment variable:
