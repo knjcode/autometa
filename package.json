@@ -27,13 +27,13 @@
     "ect": "^0.5.9",
     "ejs": "^1.0.0",
     "xlsjs": "^0.7.1",
-    "xlsx": "^0.7.8"
+    "xlsx": "^0.7.9"
   },
   "devDependencies": {
     "chai": "^1.9.1",
     "coffee-script": "^1.7.1",
     "gulp": "^3.8.7",
-    "gulp-coffee": "^2.1.1",
+    "gulp-coffee": "^2.1.2",
     "gulp-coffeelint": "^0.3.3",
     "gulp-jshint": "^1.8.4",
     "gulp-mocha": "^1.0.0",
