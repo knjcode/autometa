@@ -19,6 +19,9 @@ if(templates_dirs)
 # Directory of input file
 file_dir = ''
 
+# Template ID specified manually
+specified_template_id = ''
+
 readExcelFile = (excelfile) ->
   excelfile = path.resolve(excelfile)
   # read excelfile
@@ -61,6 +64,12 @@ exports.registerTemplates = (templates) ->
         console.log 'Error. ' + filename + ' is not template.'
     else
       console.log 'Error. Input file does not exist.'
+
+exports.setTemplateID = (template_id) ->
+  if not specified_template_id
+    specified_template_id = template_id
+    return true
+  return false
 
 getTemplateFilePath = (id, ext) ->
   # Search input file directory
@@ -188,8 +197,11 @@ exports.generate = (excelfile) ->
 
     worksheet = workbook.Sheets[sheet]
 
-    # read template ID
-    id = worksheet.A1.w
+    # set template ID
+    if specified_template_id
+      id = specified_template_id
+    else
+      id = worksheet.A1.w
 
     # make csv filename
     csvfilename = getTemplateFilePath(id, '.csv')

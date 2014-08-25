@@ -8,7 +8,8 @@ program
   .version(package.version, '-v, --version')
   .usage('[options] <Excel spreadsheet>')
   .option('-o, --stdout', 'place output of first sheet on stdout')
-  .option('-r, --register <template file>', 'register templates', String);
+  .option('-r, --register <template file>', 'register templates', String)
+  .option('-t, --template <Template ID>', 'set a Template ID manually', String);
 
 program.on('--help', function () {
   console.log("  Environment variable:");
@@ -20,16 +21,27 @@ program.parse(process.argv);
 
 var templates = [];
 
-if(!program.args.length) { // No filename found
-  if(program.register) {
-    templates.push(program.register);
-    autometa.registerTemplates(templates);
-    process.exit(0);
-  } else {
-    program.help();
+// if secified template option
+if(program.template) {
+  if(!autometa.setTemplateID(program.template)){
+    console.log("Failed to set the Template ID.");
+    process.exit(1);
   }
+}
+
+// if specified register option
+if(program.register) {
+  templates.push(program.register);
+  templates = templates.concat(program.args);
+  autometa.registerTemplates(templates);
+  process.exit(0);
+}
+
+if(!program.args.length) { // No filename found
+  program.help();
 } else { // filename found
   if(program.stdout) {
+    //console.log(program.args[0]);
     output = autometa.generate(program.args[0]);
     if(output) {
       console.log(output[1][0][1]); // Print only output of first sheet
@@ -38,11 +50,6 @@ if(!program.args.length) { // No filename found
       console.log("Error. Check input file.");
       process.exit(1);
     }
-  } else if(program.register) { // Count strings as templates
-    templates.push(program.register);
-    templates = templates.concat(program.args);
-    autometa.registerTemplates(templates);
-    process.exit(0);
   } else {
     // Only filename specified
     if(autometa.generateFile(program.args[0])) { // Success to generate file
