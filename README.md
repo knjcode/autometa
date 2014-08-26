@@ -119,6 +119,14 @@ You can also place templates by register command.
     $ Register success: [Template ID].ejs placed on [templates directory]
     $ Register success: [Template ID].csv placed on [templates directory]
 
+## Set a Template ID manually
+
+If you want to set a Template ID manually, use `-t, --template` option.
+
+    $ autometa -t your-template-id note-example.xlsx
+
+When you set this option, Excel worksheet's Template ID is ignored.
+
 ## Usage manual
 
     $ autometa -h
@@ -130,6 +138,7 @@ You can also place templates by register command.
         -v, --version                   output the version number
         -o, --stdout                    place output of first sheet on stdout
         -r, --register <template file>  register templates
+        -t, --template <Template ID>    set a Template ID manually
     
     Environment variable:
     AUTOMETA_TEMPLATES         Set ':'-separeted list of directories,
