@@ -131,6 +131,20 @@ moveCell = (cellstr, direction) ->
 
   return encodeCell(cell)
 
+parseCsv = (csvfile) ->
+  keymap = []
+  rowData = csvfile.split(String.fromCharCode(10))
+  for d in rowData
+    data = d.split(',')
+    if data.length == 2
+      if data[0] isnt ''
+        keymap[data[0]] = data[1]
+    else if data.length == 3
+      if data[0] isnt ''
+        cell = { r:parseInt(data[1]), c:parseInt(data[2]) }
+        keymap[data[0]] = encodeCell(cell)
+  return keymap
+
 mapKey = (keymap, worksheet) ->
   # Length of HORIZONTAL_MARK
   lhm = HORIZONTAL_MARK.length
@@ -217,12 +231,7 @@ exports.generate = (excelfile) ->
     csvfile = fs.readFileSync(csvfilename, 'utf8')
 
     # parse csv
-    keymap = []
-    rowData = csvfile.split(String.fromCharCode(10))
-    for d in rowData
-      data = d.split(',')
-      if data[0] isnt ''
-        keymap[data[0]] = data[1]
+    keymap = parseCsv(csvfile)
 
     # map keymap to excel
     keymap = mapKey(keymap, worksheet)
