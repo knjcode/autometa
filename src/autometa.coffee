@@ -28,12 +28,14 @@ readExcelFile = (excelfile) ->
   if fs.existsSync(excelfile)
     file_dir = excelfile
     ext = path.extname(excelfile)
-    if ext is '.xlsx'
-      workbook = xlsx.readFile(excelfile)
-    else if ext is '.xls'
-      workbook = xls.readFile(excelfile)
-    else
-      return false
+    ext = ext.toLowerCase()
+    switch ext
+      when '.xlsx', '.xlsm', '.xlsb'
+        workbook = xlsx.readFile(excelfile)
+      when '.xls'
+        workbook = xls.readFile(excelfile)
+      else
+        return false
   else
     file_dir = ''
     return false
