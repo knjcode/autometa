@@ -27,17 +27,17 @@
     "ect": "^0.5.9",
     "ejs": "^1.0.0",
     "xlsjs": "^0.7.1",
-    "xlsx": "^0.7.9"
+    "xlsx": "^0.7.10"
   },
   "devDependencies": {
     "chai": "^1.9.1",
-    "coffee-script": "^1.7.1",
-    "gulp": "^3.8.7",
-    "gulp-coffee": "^2.1.2",
-    "gulp-coffeelint": "^0.3.3",
+    "coffee-script": "^1.8.0",
+    "gulp": "^3.8.8",
+    "gulp-coffee": "^2.2.0",
+    "gulp-coffeelint": "^0.4.0",
     "gulp-jshint": "^1.8.4",
-    "gulp-mocha": "^1.0.0",
-    "gulp-util": "^3.0.0",
+    "gulp-mocha": "^1.1.0",
+    "gulp-util": "^3.0.1",
     "run-sequence": "^0.3.6",
     "sinon": "^1.10.3"
   }
