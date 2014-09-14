@@ -152,6 +152,14 @@ commander, ect, ejs, xlsjs, xlsx
 
 Example data in reference to [XML Examples]
 
+## Notes
+
+Segmentation faults in node v0.10.31 stem from a bug in node.
+Autometa will throw an error if it is running under that version.
+Since versions prior to v0.10.30 do not exhibit the problem,
+rolling back to a previous version of node is the best remedy.
+See <https://github.com/joyent/node/issues/8208> for more information.
+
 ## License
 
 Copyright &copy; 2014 [Kenji Doi (knjcode)](https://github.com/knjcode)  

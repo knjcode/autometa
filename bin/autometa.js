@@ -19,6 +19,15 @@ program.on('--help', function () {
 
 program.parse(process.argv);
 
+if(process.version === 'v0.10.31') {
+  var msgs = [
+    "node v0.10.31 is known to crash on OSX and Linux, refusing to proceed.",
+    "see https://github.com/joyent/node/issues/8208 for the relevant node issue"
+  ];
+  msgs.forEach(function(m) { console.error(m); });
+  process.exit(1);
+}
+
 var templates = [];
 
 // if secified template option
