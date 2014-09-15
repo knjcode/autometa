@@ -47,7 +47,10 @@ registerTemplate = (template, filename) ->
     template_dir = path.resolve(template_dir)
     if fs.existsSync(template_dir)
       targetFile = path.join(template_dir,filename)
-      fs.writeFileSync(targetFile, fs.readFileSync(template))
+      try
+        fs.writeFileSync(targetFile, fs.readFileSync(template))
+      catch err
+        return false
       console.log 'Register success: ' + filename + ' placed on ' + template_dir
       return true
   return false
@@ -183,19 +186,37 @@ mapKey = (keymap, worksheet) ->
       delete keymap[key]
   return keymap
 
-exports.generateFile = (excelfile) ->
+exports.generateFile = (excelfile, filename) ->
   out = exports.generate(excelfile)
   if out
     sheetnum = out[0]
     outputs = out[1]
 
+    # if filename specified
+    if filename
+      if (filename is "/dev/stdout") or (filename is "-")
+        process.stdout.write(outputs[0][1])
+      else
+        filename = path.resolve(filename)
+        console.log "Writing " + filename
+        try
+          fs.writeFileSync(filename, outputs[0][1])
+        catch err
+          return false
+        console.log "Finish."
+      return true
+
     for i in [0...sheetnum]
       FileName = outputs[i][0]
       output = outputs[i][1]
 
-      fs.writeFileSync(FileName, output)
       console.log "Writing " + FileName
+      try
+        fs.writeFileSync(FileName, output)
+      catch err
+        return false
       console.log "Finish."
+
     return true
   else
     return false

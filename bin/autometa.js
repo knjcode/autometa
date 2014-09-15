@@ -7,7 +7,7 @@ var package = require('../package.json');
 program
   .version(package.version, '-v, --version')
   .usage('[options] <Excel spreadsheet>')
-  .option('-o, --stdout', 'place output of first sheet on stdout')
+  .option('-o, --output <filename>', 'set output file name of first sheet manually', String)
   .option('-r, --register <template file>', 'register templates', String)
   .option('-t, --template <Template ID>', 'set a Template ID manually', String);
 
@@ -48,25 +48,13 @@ if(program.register) {
 
 if(!program.args.length) { // No filename found
   program.help();
-} else { // filename found
-  if(program.stdout) {
-    //console.log(program.args[0]);
-    output = autometa.generate(program.args[0]);
-    if(output) {
-      console.log(output[1][0][1]); // Print only output of first sheet
-      process.exit(0);
-    } else {
-      console.log("Error. Check input file.");
-      process.exit(1);
-    }
+} else { // Filename found
+  if(autometa.generateFile(program.args[0],program.output)) {
+    // Success to generate file
+    process.exit(0);
   } else {
-    // Only filename specified
-    if(autometa.generateFile(program.args[0])) { // Success to generate file
-      process.exit(0);
-    } else { // Failed to generate file
-      console.log("Error. Check input file.");
-      process.exit(1);
-    }
+    console.log("Error. Check input file.");
+    process.exit(1);
   }
 }
 
