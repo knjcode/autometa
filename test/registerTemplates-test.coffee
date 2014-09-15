@@ -31,11 +31,11 @@ describe 'autometa registerTemplates function should return', ->
 
   it 'error message if not template specified', (done) ->
     cp.exec not_template_specified, (error, stdout, stderr) ->
-      stdout.toString().should.string('Error. test.xlsx is not template.')
+      stderr.toString().should.string('Error. test.xlsx is not template.')
       done()
 
   it 'error messsage if not exists template specified', (done) ->
     cp.exec not_exists_template_specified, (error, stdout, stderr) ->
-      stdout.toString().should.string('Error. Input file does not exist.')
+      stderr.toString().should.string('Error. Input file does not exist.')
       done()
 

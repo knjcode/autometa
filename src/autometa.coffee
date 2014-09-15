@@ -64,11 +64,11 @@ exports.registerTemplates = (templates) ->
       ext = path.extname(template)
       if ext is '.csv' or ext is '.ejs'
         if not registerTemplate(template, filename)
-          console.log 'Error. Can not write file.'
+          console.error 'Error. Can not write file.'
       else
-        console.log 'Error. ' + filename + ' is not template.'
+        console.error 'Error. ' + filename + ' is not template.'
     else
-      console.log 'Error. Input file does not exist.'
+      console.error 'Error. Input file does not exist.'
 
 exports.setTemplateID = (template_id) ->
   if not specified_template_id

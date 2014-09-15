@@ -33,7 +33,7 @@ var templates = [];
 // if secified template option
 if(program.template) {
   if(!autometa.setTemplateID(program.template)){
-    console.log("Failed to set the Template ID.");
+    console.error("Failed to set the Template ID.");
     process.exit(1);
   }
 }
@@ -53,7 +53,7 @@ if(!program.args.length) { // No filename found
     // Success to generate file
     process.exit(0);
   } else {
-    console.log("Error. Check input file.");
+    console.error("Error. Check input file.");
     process.exit(1);
   }
 }

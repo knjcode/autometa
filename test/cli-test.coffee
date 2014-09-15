@@ -48,7 +48,7 @@ describe 'autometa command-line interface should return', ->
 
   it 'error messsage if not exists file specified', (done) ->
     cp.exec cmd_notexistsfile, (error, stdout, stderr) ->
-      stdout.toString().should.equal('Error. Check input file.\n')
+      stderr.toString().should.equal('Error. Check input file.\n')
       done()
 
   it 'output if cell specified with row and column index', (done) ->
