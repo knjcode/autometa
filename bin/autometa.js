@@ -13,7 +13,7 @@ program
 
 program.on('--help', function () {
   console.log("  Environment variable:");
-  console.log("  AUTOMETA_TEMPLATES       Set ':'-separeted list of directories,");
+  console.log("  AUTOMETA_TEMPLATES       Set \":\"-separeted list of directories,");
   console.log("                           If you want to change templates directory.");
 });
 
