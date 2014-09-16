@@ -27,7 +27,8 @@
     "ect": "^0.5.9",
     "ejs": "^1.0.0",
     "xlsjs": "^0.7.1",
-    "xlsx": "^0.7.10"
+    "xlsx": "^0.7.10",
+    "readline-sync": "~0.4.8"
   },
   "devDependencies": {
     "chai": "^1.9.1",
