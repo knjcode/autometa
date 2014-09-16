@@ -3,10 +3,10 @@ chai.should()
 cp = require 'child_process'
 pack = require '../package.json'
 
-csv_template_specified = 'node bin/autometa.js -r templates/test.csv'
-ejs_template_specified = 'node bin/autometa.js -r templates/test.ejs'
+csv_template_specified = 'node bin/autometa.js -f -r templates/test.csv'
+ejs_template_specified = 'node bin/autometa.js -f -r templates/test.ejs'
 csv_and_ejs_template_specified =
-  'node bin/autometa.js -r templates/test.csv templates/test.ejs'
+  'node bin/autometa.js -f -r templates/test.csv templates/test.ejs'
 not_template_specified = 'node bin/autometa.js -r test/test.xlsx'
 not_exists_template_specified = 'node bin/autometa.js -r not-exists-template'
 

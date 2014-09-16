@@ -1,5 +1,6 @@
 fs = require 'fs'
 path = require 'path'
+readlineSync = require 'readline-sync'
 xlsx = require 'xlsx'
 xls = require 'xlsjs'
 ejs = require 'ejs'
@@ -15,6 +16,12 @@ TEMPLATES_DIRS = ['./templates']
 templates_dirs = process.env.AUTOMETA_TEMPLATES
 if(templates_dirs)
   TEMPLATES_DIRS = templates_dirs.split(':').concat(TEMPLATES_DIRS)
+
+# yes/no question
+valid = {
+  "yes": true, "y": true, "YES": true, "Y": true,
+  "no": false, "n": false, "NO": false, "N": false
+}
 
 # Directory of input file
 file_dir = ''
@@ -41,13 +48,21 @@ readExcelFile = (excelfile) ->
     return false
   return workbook
 
-registerTemplate = (template, filename) ->
+registerTemplate = (template, filename, overwrite) ->
   # copy template file to template path
   for template_dir in TEMPLATES_DIRS
     template_dir = path.resolve(template_dir)
     if fs.existsSync(template_dir)
       targetFile = path.join(template_dir,filename)
+      basename = path.basename(targetFile)
+      console.log "Writing " + targetFile
       try
+        if fs.existsSync(targetFile)
+          if not overwrite
+            console.error 'Error. ' + basename + ' already exists.'
+            answer = readlineSync.question 'overwrite? [y/n] '
+            if not valid[answer]
+              return false
         fs.writeFileSync(targetFile, fs.readFileSync(template))
       catch err
         return false
@@ -55,16 +70,16 @@ registerTemplate = (template, filename) ->
       return true
   return false
 
-exports.registerTemplates = (templates) ->
+exports.registerTemplates = (templates, overwrite) ->
   for template in templates
     template = path.resolve(template)
     filename = path.basename(template)
     
     if fs.existsSync(template)
       ext = path.extname(template)
-      if ext is '.csv' or ext is '.ejs'
-        if not registerTemplate(template, filename)
-          console.error 'Error. Can not write file.'
+      if (ext is '.csv') or (ext is '.ejs')
+        if not registerTemplate(template, filename, overwrite)
+          console.error 'Failed to generate file.'
       else
         console.error 'Error. ' + filename + ' is not template.'
     else
@@ -186,7 +201,7 @@ mapKey = (keymap, worksheet) ->
       delete keymap[key]
   return keymap
 
-exports.generateFile = (excelfile, filename) ->
+exports.generateFile = (excelfile, filename, overwrite) ->
   out = exports.generate(excelfile)
   if out
     sheetnum = out[0]
@@ -198,8 +213,15 @@ exports.generateFile = (excelfile, filename) ->
         process.stdout.write(outputs[0][1])
       else
         filename = path.resolve(filename)
+        basename = path.basename(filename)
         console.log "Writing " + filename
         try
+          if fs.existsSync(filename)
+            if not overwrite
+              console.error 'Error. ' + basename + ' already exists.'
+              answer = readlineSync.question 'overwrite? [y/n] '
+              if not valid[answer]
+                return false
           fs.writeFileSync(filename, outputs[0][1])
         catch err
           return false
@@ -210,8 +232,16 @@ exports.generateFile = (excelfile, filename) ->
       FileName = outputs[i][0]
       output = outputs[i][1]
 
+      FileName = path.resolve(FileName)
+      basename = path.basename(FileName)
       console.log "Writing " + FileName
       try
+        if fs.existsSync(FileName)
+          if not overwrite
+            console.error 'Error. ' + basename + ' already exists.'
+            answer = readlineSync.question 'overwrite? [y/n] '
+            if not valid[answer]
+              continue
         fs.writeFileSync(FileName, output)
       catch err
         return false
