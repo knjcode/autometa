@@ -113,21 +113,23 @@ If you want to add templates directory, set AUTOMETA_TEMPLATES environment varia
 
 If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these files in the templates directory. 
 
-You can also place templates by register command.
+You can also place templates by register option (-r or --register).
 
     $ autometa -r [Template ID].ejs [Template ID].csv
     $ Register success: [Template ID].ejs placed on [templates directory]
     $ Register success: [Template ID].csv placed on [templates directory]
 
-## Set a file name manually
+## Set a filename manually
 
-If you want to set a file name of first sheet manually, use `-o, --output` option.
+If you want to set a filename of first sheet manually, use `-o, --output` option.
 
     $ autometa -o /path/to/your/filename note-example.xlsx
 
-If specified file name is "/dev/stdout" or "-", place output on stdout
+If specified filename is "/dev/stdout" or "-", autometa place output on stdout.
 
     $ autometa -o /dev/stdout note-example.xlsx
+
+When you use this option, Excel worksheet's FileName is ignored.
 
 ## Set a Template ID manually
 
@@ -146,6 +148,7 @@ When you set this option, Excel worksheet's Template ID is ignored.
 
         -h, --help                      output usage information
         -v, --version                   output the version number
+        -f, --force                     overwrite existing files
         -o, --output                    set output file name of first sheet manually
         -r, --register <template file>  register templates
         -t, --template <Template ID>    set a Template ID manually
