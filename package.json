@@ -41,5 +41,6 @@
     "gulp-util": "^3.0.1",
     "run-sequence": "^0.3.6",
     "sinon": "^1.10.3"
-  }
+  },
+  "preferGlobal": true
 }
