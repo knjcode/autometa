@@ -11,6 +11,10 @@ cmd_template =
 cmd_notexistsfile = 'node bin/autometa.js not-exists-file'
 cmd_csv_parse =
   'node bin/autometa.js -o - -t test-csv-parse test/test.xlsx'
+cmd_remove_xml = 'rm -f test.xml'
+cmd_not_overwrite = 'node bin/autometa.js test/test.xlsx'
+cmd_overwrite_confirmation = 'echo y | node bin/autometa.js test/test.xlsx'
+cmd_no_overwrite_confirmation = 'node bin/autometa.js -f test/test.xlsx'
 
 describe 'autometa command-line interface should return', ->
   this.timeout 5000
@@ -56,5 +60,29 @@ describe 'autometa command-line interface should return', ->
       stdout.toString().should.string(
         '<person>\n  <name>Kenji Doi</name>\n  <age>31</age>\n</person>'
       )
+      done()
+
+  it 'no overwrite confirmation if output not exists', (done) ->
+    cp.exec cmd_remove_xml, (error, stdout, stderr) ->
+      if error
+        console.log error
+      else
+        cp.exec cmd_not_overwrite, (error, stdout, stderr) ->
+          stdout.toString().should.string('Writing')
+          stdout.toString().should.string('Finish.')
+          done()
+
+  it 'overwrite confirmation if output exists', (done) ->
+    cp.exec cmd_overwrite_confirmation, (error, stdout, stderr) ->
+      stdout.toString().should.string('Writing')
+      stderr.toString().should.string('Error.')
+      stdout.toString().should.string('overwrite?')
+      done()
+
+  it 'no overwrite confirmation if force option specified', (done) ->
+    cp.exec cmd_no_overwrite_confirmation, (error, stdout, stderr) ->
+      stdout.toString().should.string('Writing')
+      stdout.toString().should.string('Finish.')
+      stdout.toString().should.not.string('overwrite?')
       done()
 
