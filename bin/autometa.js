@@ -11,8 +11,8 @@ program
   .usage('[options] <Excel spreadsheet>')
   .option('-f, --force', 'overwrite existing files')
   .option('-p, --print-templates-dirs', 'print templates direcotries')
-  .option('-o, --output <filename>', 'set output file name of first\n\
-                                     sheet manually', String)
+  .option('-o, --output <filename>', 'set output file name of first\n' +
+          '                                     sheet manually', String)
   .option('-r, --register-templates <files>', 'register template files', String)
   .option('-t, --set-template-id <Template ID>', 'set a Template ID manually', String);
 
