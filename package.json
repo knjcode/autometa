@@ -39,7 +39,7 @@
     "gulp-jshint": "^1.8.4",
     "gulp-mocha": "^1.1.0",
     "gulp-util": "^3.0.1",
-    "run-sequence": "^0.3.6",
+    "run-sequence": "^0.3.7",
     "sinon": "^1.10.3"
   },
   "preferGlobal": true
