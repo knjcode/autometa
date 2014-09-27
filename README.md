@@ -149,6 +149,7 @@ When you set this option, Excel worksheet's Template ID is ignored.
         -h, --help                      output usage information
         -v, --version                   output the version number
         -f, --force                     overwrite existing files
+        -p, --print-templates-dirs      print templates direcotries
         -o, --output                    set output file name of first sheet manually
         -r, --register <template file>  register templates
         -t, --template <Template ID>    set a Template ID manually

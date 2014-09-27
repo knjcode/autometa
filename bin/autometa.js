@@ -10,6 +10,7 @@ program
   .version(package.version, '-v, --version')
   .usage('[options] <Excel spreadsheet>')
   .option('-f, --force', 'overwrite existing files')
+  .option('-p, --print-templates-dirs', 'print templates direcotries')
   .option('-o, --output <filename>', 'set output file name of first sheet manually', String)
   .option('-r, --register <template file>', 'register templates', String)
   .option('-t, --template <Template ID>', 'set a Template ID manually', String);
@@ -49,6 +50,12 @@ if(program.register) {
   templates.push(program.register);
   templates = templates.concat(program.args);
   autometa.registerTemplates(templates,overwrite);
+  process.exit(0);
+}
+
+// if specified print-templates-dirs option
+if(program.printTemplatesDirs) {
+  console.log(autometa.getTemplatesDirs());
   process.exit(0);
 }
 

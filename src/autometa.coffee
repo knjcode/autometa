@@ -9,8 +9,8 @@ ejs = require 'ejs'
 HORIZONTAL_MARK = '*'
 VERTICAL_MARK = '#'
 
-# Default templates directory is './templates'
-TEMPLATES_DIRS = ['./templates']
+# Default templates directory
+TEMPLATES_DIRS = [path.resolve(__dirname, '../templates')]
 
 # if AUTOMETA_TEMPLATES is set, add specified directories into TEMPLATES_DIRS
 templates_dirs = process.env.AUTOMETA_TEMPLATES
@@ -84,6 +84,9 @@ exports.registerTemplates = (templates, overwrite) ->
         console.error 'Error. ' + filename + ' is not template.'
     else
       console.error 'Error. Input file does not exist.'
+
+exports.getTemplatesDirs = ->
+  return TEMPLATES_DIRS
 
 exports.setTemplateID = (template_id) ->
   if not specified_template_id

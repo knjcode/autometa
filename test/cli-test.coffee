@@ -15,6 +15,7 @@ remove_xml = 'rm -f test.xml'
 not_overwrite = cmd + 'test/test.xlsx'
 overwrite_confirmation = 'echo y | ' + cmd + 'test/test.xlsx'
 no_overwrite_confirmation = cmd + '-f test/test.xlsx'
+print_templates_dirs = cmd + '-p'
 
 describe 'autometa command-line interface should return', ->
   this.timeout 5000
@@ -85,5 +86,11 @@ describe 'autometa command-line interface should return', ->
         stdout.should.string('Writing')
         stdout.should.string('Finish.')
         stdout.should.not.string('overwrite?')
+        done()
+
+  it 'templates dirs if print-templates-dirs option specified', (done) ->
+    exec print_templates_dirs, (error, stdout, stderr) ->
+      unless error
+        stdout.should.string('/templates')
         done()
 
