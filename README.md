@@ -113,7 +113,7 @@ If you want to add templates directory, set AUTOMETA_TEMPLATES environment varia
 
 If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these files in the templates directory. 
 
-You can also place templates by register option (-r or --register).
+You can also place templates by register option (-r or --register-templates).
 
     $ autometa -r [Template ID].ejs [Template ID].csv
     $ Register success: [Template ID].ejs placed on [templates directory]
@@ -133,7 +133,7 @@ When you use this option, Excel worksheet's FileName is ignored.
 
 ## Set a Template ID manually
 
-If you want to set a Template ID manually, use `-t, --template` option.
+If you want to set a Template ID manually, use `-t, --set-template-id` option.
 
     $ autometa -t your-template-id note-example.xlsx
 
@@ -146,13 +146,14 @@ When you set this option, Excel worksheet's Template ID is ignored.
 
       Options:
 
-        -h, --help                      output usage information
-        -v, --version                   output the version number
-        -f, --force                     overwrite existing files
-        -p, --print-templates-dirs      print templates direcotries
-        -o, --output                    set output file name of first sheet manually
-        -r, --register <template file>  register templates
-        -t, --template <Template ID>    set a Template ID manually
+        -h, --help                           output usage information
+        -v, --version                        output the version number
+        -f, --force                          overwrite existing files
+        -p, --print-templates-dirs           print templates direcotries
+        -o, --output                         set output file name of first
+                                             sheet manually
+        -r, --register-templates <files>     register template files
+        -t, --set-template-id <Template ID>  set a Template ID manually
     
     Environment variable:
     AUTOMETA_TEMPLATES         Set ":"-separeted list of directories,

@@ -11,9 +11,10 @@ program
   .usage('[options] <Excel spreadsheet>')
   .option('-f, --force', 'overwrite existing files')
   .option('-p, --print-templates-dirs', 'print templates direcotries')
-  .option('-o, --output <filename>', 'set output file name of first sheet manually', String)
-  .option('-r, --register <template file>', 'register templates', String)
-  .option('-t, --template <Template ID>', 'set a Template ID manually', String);
+  .option('-o, --output <filename>', 'set output file name of first\n\
+                                     sheet manually', String)
+  .option('-r, --register-templates <files>', 'register template files', String)
+  .option('-t, --set-template-id <Template ID>', 'set a Template ID manually', String);
 
 program.on('--help', function () {
   console.log("  Environment variable:");
@@ -33,8 +34,8 @@ if(process.version === 'v0.10.31') {
 }
 
 // if specified template option
-if(program.template) {
-  if(!autometa.setTemplateID(program.template)){
+if(program.setTemplateId) {
+  if(!autometa.setTemplateID(program.setTemplateId)){
     console.error("Failed to set the Template ID.");
     process.exit(1);
   }
@@ -46,8 +47,8 @@ if(program.force) {
 }
 
 // if specified register option
-if(program.register) {
-  templates.push(program.register);
+if(program.registerTemplates) {
+  templates.push(program.registerTemplates);
   templates = templates.concat(program.args);
   autometa.registerTemplates(templates,overwrite);
   process.exit(0);
