@@ -28,3 +28,6 @@ node_modules
 test.xml
 test-*.xml
 
+# Ignore other unneeded files
+.DS_Store
+*~
