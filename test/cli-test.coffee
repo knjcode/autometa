@@ -9,6 +9,7 @@ help = cmd + '-h'
 output_stdout = cmd + '-o /dev/stdout test/test.xlsx'
 output_hyphen = cmd + '-o - test/test.xlsx'
 template = cmd + '-o - -t test note-example.xlsx'
+ect_support = cmd + '-o - -t test-ect test/test.xlsx'
 notexistsfile = cmd + 'not-exists-file'
 csv_parse = cmd + '-o - -t test-csv-parse test/test.xlsx'
 remove_xml = 'rm -f test.xml'
@@ -48,6 +49,13 @@ describe 'autometa command-line interface should return', ->
     exec template, (error, stdout, stderr) ->
       stdout.should.string(
         '<person>\n  <name>Hanako</name>\n  <age>Taro</age>\n</person>'
+      )
+      done()
+
+  it 'output if ect template specified', (done) ->
+    exec ect_support, (error, stdout, stderr) ->
+      stdout.should.string(
+        '<person-ect>\n  <name>Kenji Doi</name>\n  <age>31</age>\n</person-ect>'
       )
       done()
 
