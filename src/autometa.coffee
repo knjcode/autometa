@@ -4,6 +4,7 @@ readlineSync = require 'readline-sync'
 xlsx = require 'xlsx'
 xls = require 'xlsjs'
 ejs = require 'ejs'
+ect = require 'ect'
 
 # Default horizontal and vertical mark
 HORIZONTAL_MARK = '*'
@@ -77,7 +78,7 @@ exports.registerTemplates = (templates, overwrite) ->
     
     if fs.existsSync(template)
       ext = path.extname(template)
-      if (ext is '.csv') or (ext is '.ejs')
+      if (ext is '.csv') or (ext is '.ejs') or (ext is '.ect')
         if not registerTemplate(template, filename, overwrite)
           console.error 'Failed to generate file.'
       else
@@ -278,10 +279,13 @@ exports.generate = (excelfile) ->
     if not csvfilename
       return false
 
-    # make ejs file name
-    ejsfilename = getTemplateFilePath(id, '.ejs')
-    if not ejsfilename
-      return false
+    # check the existence of ejs or ect template file
+    # if both are exist, autometa will use ejs
+    tmplfilename = getTemplateFilePath(id, '.ejs')
+    if not tmplfilename
+      tmplfilename = getTemplateFilePath(id, '.ect')
+      if not tmplfilename
+        return false
 
     # read csv file
     csvfile = fs.readFileSync(csvfilename, 'utf8')
@@ -294,8 +298,15 @@ exports.generate = (excelfile) ->
     if not keymap
       return false
 
-    template = fs.readFileSync(ejsfilename, 'utf8')
-    output = ejs.render(template, keymap)
+    ext = path.extname(tmplfilename)
+    if ext is '.ejs'
+      template = fs.readFileSync(tmplfilename, 'utf8')
+      output = ejs.render(template, keymap)
+    else if ext is '.ect'
+      renderer = ect({ root: path.dirname(tmplfilename), ext: '.ect'})
+      output = renderer.render(path.basename(tmplfilename), keymap)
+    else
+      return false
 
     outputs.push [keymap.FileName, output]
 
