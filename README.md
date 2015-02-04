@@ -177,7 +177,7 @@ See <https://github.com/joyent/node/issues/8208> for more information.
 
 ## License
 
-Copyright &copy; 2014 [Kenji Doi (knjcode)](https://github.com/knjcode)  
+Copyright &copy; 2014-2015 [Kenji Doi (knjcode)](https://github.com/knjcode)  
 Licensed under the [Apache License, Version 2.0][Apache]
 
 [npm-url]: https://npmjs.org/package/autometa
