@@ -103,15 +103,16 @@ You can get data from each worksheet of Excel spreadsheets.
 
 ## Templates directory
 
-Autometa search templates ([Template ID].csv and [Template ID].ejs) in the current directory of input file first.
-If templates not found, search default templates directory ([autometa package directory]/templates).
+Autometa search templates ([Template ID].csv and [Template ID].ejs) in the current directory of input file first.  
+If templates not found, search default templates directory ([autometa package directory]/templates).  
 If you want to add templates directory, set AUTOMETA_TEMPLATES environment variable.
 
     $ export AUTOMETA_TEMPLATES="/path/to/your/templates"
 
 ## Original Templates
 
-If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these files in the templates directory. 
+If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these files in the templates directory.  
+You can use ect templates ([Template ID].ect) instead of ejs templates. If both ejs and ect templates are exist, autometa will use ejs.
 
 You can also place templates by register option (-r or --register-templates).
 
@@ -154,26 +155,18 @@ When you set this option, Excel worksheet's Template ID is ignored.
                                              sheet manually
         -r, --register-templates <files>     register template files
         -t, --set-template-id <Template ID>  set a Template ID manually
-    
+
     Environment variable:
     AUTOMETA_TEMPLATES         Set ":"-separeted list of directories,
                                if you want to change templates directory.
 
 ## Dependencies
 
-commander, ect, ejs, xlsjs, xlsx
+commander, ect, ejs, xlsjs, xlsx, readline-sync
 
 ## References
 
 Example data in reference to [XML Examples]
-
-## Notes
-
-Segmentation faults in node v0.10.31 stem from a bug in node.
-Autometa will throw an error if it is running under that version.
-Since versions prior to v0.10.30 do not exhibit the problem,
-rolling back to a previous version of node is the best remedy.
-See <https://github.com/joyent/node/issues/8208> for more information.
 
 ## License
 
