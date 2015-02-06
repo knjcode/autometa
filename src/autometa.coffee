@@ -75,7 +75,7 @@ exports.registerTemplates = (templates, overwrite) ->
   for template in templates
     template = path.resolve(template)
     filename = path.basename(template)
-    
+
     if fs.existsSync(template)
       ext = path.extname(template)
       if (ext is '.csv') or (ext is '.ejs') or (ext is '.ect')
