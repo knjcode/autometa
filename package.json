@@ -23,24 +23,24 @@
     "url": "https://github.com/knjcode/autometa/issues"
   },
   "dependencies": {
-    "commander": "^2.6.0",
+    "commander": "^2.8.1",
     "ect": "^0.5.9",
-    "ejs": "^1.0.0",
-    "xlsjs": "^0.7.2",
-    "xlsx": "^0.7.12",
-    "readline-sync": "~0.5.2"
+    "ejs": "^2.3.1",
+    "readline-sync": "^0.6.1",
+    "xlsjs": "^0.7.5",
+    "xlsx": "^0.8.0"
   },
   "devDependencies": {
-    "chai": "^1.10.0",
-    "coffee-script": "^1.9.0",
-    "gulp": "^3.8.10",
+    "chai": "^2.3.0",
+    "coffee-script": "^1.9.2",
+    "gulp": "^3.8.11",
     "gulp-coffee": "^2.3.1",
     "gulp-coffeelint": "^0.4.0",
-    "gulp-jshint": "^1.9.2",
-    "gulp-mocha": "^2.0.0",
-    "gulp-util": "^3.0.3",
-    "run-sequence": "^1.0.2",
-    "sinon": "^1.12.2"
+    "gulp-jshint": "^1.10.0",
+    "gulp-mocha": "^2.0.1",
+    "gulp-util": "^3.0.4",
+    "run-sequence": "^1.1.0",
+    "sinon": "^1.14.1"
   },
   "preferGlobal": true
 }
