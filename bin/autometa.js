@@ -10,7 +10,7 @@ program
   .version(package.version, '-v, --version')
   .usage('[options] <Excel spreadsheet>')
   .option('-f, --force', 'overwrite existing files')
-  .option('-p, --print-templates-dirs', 'print templates direcotries')
+  .option('-p, --print-templates-dirs', 'print templates directories')
   .option('-o, --output <filename>', 'set output file name of first\n' +
           '                                     sheet manually', String)
   .option('-r, --register-templates <files>', 'register template files', String)
@@ -18,7 +18,7 @@ program
 
 program.on('--help', function () {
   console.log("  Environment variable:");
-  console.log("  AUTOMETA_TEMPLATES       Set \":\"-separeted list of directories,");
+  console.log("  AUTOMETA_TEMPLATES       Set \":\"-separated list of directories,");
   console.log("                           If you want to change templates directory.");
 });
 
