@@ -112,7 +112,7 @@ If you want to add templates directory, set AUTOMETA_TEMPLATES environment varia
 ## Original Templates
 
 If you want to define original templates, create [Template ID].csv, [Template ID].ejs and place these files in the templates directory.  
-You can use ect templates ([Template ID].ect) instead of ejs templates. If both ejs and ect templates are exist, autometa will use ejs.
+You can use ect templates ([Template ID].ect) instead of ejs templates. If both ejs and ect templates exist, autometa will use ejs.
 
 You can also place templates by register option (-r or --register-templates).
 
@@ -150,14 +150,14 @@ When you set this option, Excel worksheet's Template ID is ignored.
         -h, --help                           output usage information
         -v, --version                        output the version number
         -f, --force                          overwrite existing files
-        -p, --print-templates-dirs           print templates direcotries
+        -p, --print-templates-dirs           print templates directories
         -o, --output                         set output file name of first
                                              sheet manually
         -r, --register-templates <files>     register template files
         -t, --set-template-id <Template ID>  set a Template ID manually
 
     Environment variable:
-    AUTOMETA_TEMPLATES         Set ":"-separeted list of directories,
+    AUTOMETA_TEMPLATES         Set ":"-separated list of directories,
                                if you want to change templates directory.
 
 ## Dependencies
